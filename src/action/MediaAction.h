@@ -32,9 +32,45 @@ namespace cloudappclient {
 
     public:
 
-      
-        
-        
+        void userStartPlay(const T &actionBean) override {
+
+        }
+
+        void userPausedPlay() override {
+
+        }
+
+        void userStopPlay() override {
+
+        }
+
+        void userResumePlay() override {
+
+        }
+
+        void pausePlay() override {
+
+        }
+
+        void stopPlay() override {
+
+        }
+
+        void resumePlay() override {
+
+        }
+
+        void forward() override {
+
+        }
+
+        void backward() override {
+
+        }
+
+        ACTION_TYPE &getActionType() override {
+            return ACTION_TYPE ::MEDIA;
+        }
 
     };
 }

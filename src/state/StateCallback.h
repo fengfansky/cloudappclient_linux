@@ -6,39 +6,41 @@
 namespace cloudappclient {
     class AppStateCallBack {
     public:
-        virtual void onNewIntentActionNode(const ActionNode &actionNode) = 0;
+        virtual void new_intent_action_node(const ActionNode &actionNode) = 0;
 
-        virtual void onNewEventActionNode(const ActionNode &actionNode) = 0;
+        virtual void new_event_action_node(const ActionNode &actionNode) = 0;
 
-        virtual void onAppPaused() = 0;
+        virtual void app_paused() = 0;
 
-        virtual void onAppResume() = 0;
+        virtual void app_resumed() = 0;
 
-        virtual void onAppDestory() = 0;
+        virtual void app_destroy() = 0;
     };
 
     class MediaStateCallBack {
 
     public:
-        virtual void onMediaStart() = 0;
+        virtual void media_started() = 0;
 
-        virtual void onMediaPause(const int position) = 0;
+        virtual void media_paused(const int position) = 0;
 
-        virtual void onMediaResume() = 0;
+        virtual void media_resumed() = 0;
 
-        virtual void onMediaStop() = 0;
+        virtual void media_stopped() = 0;
 
-        virtual void onMediaError(const int errorCode) = 0;
+        virtual void media_error(const int errorCode) = 0;
     };
 
     class VoiceStateCallBack {
     public:
-        virtual void onVoiceStart() = 0;
+        virtual void voice_started() = 0;
 
-        virtual void onVoiceStop() = 0;
+        virtual void voice_paused() = 0;
 
-        virtual void onVoiceCancled() = 0;
+        virtual void voice_stopped() = 0;
 
-        virtual void onVoiceError() = 0;
+        virtual void voice_cancled() = 0;
+
+        virtual void voice_error() = 0;
     };
 }
