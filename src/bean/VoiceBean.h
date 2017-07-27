@@ -4,7 +4,7 @@
 
 #include "BaseActionBean.h"
 
-namespace cloudappclient {
+namespace CloudAppClient {
     class VoiceBean : BaseActionBean {
 
     private:

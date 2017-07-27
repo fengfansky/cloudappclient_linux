@@ -9,7 +9,7 @@
 
 using std::string;
 
-namespace cloudappclient {
+namespace CloudAppClient {
     class ActionNode {
     private:
         string asr;

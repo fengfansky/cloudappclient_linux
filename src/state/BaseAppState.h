@@ -7,8 +7,8 @@
 #include "../bean/CloudActionResponseBean.h"
 #include "StateCallback.h"
 
-namespace cloudappclient {
-    class BaseAppStateManager : AppStateCallBack, MediaStateCallBack, VoiceStateCallBack {
+namespace CloudAppClient {
+    class BaseAppState : public IAppState, public MediaStateCallBack, public VoiceStateCallBack {
 
     public:
         enum VOICE_STATE {
@@ -69,7 +69,7 @@ namespace cloudappclient {
         }
 
         void set_action_node(const ActionNode &mActionNode) {
-            BaseAppStateManager::action_node = mActionNode;
+            BaseAppState::action_node = mActionNode;
         }
 
         const string &get_app_Id() const {
@@ -77,7 +77,7 @@ namespace cloudappclient {
         }
 
         void set_app_Id(const string &mAppId) {
-            BaseAppStateManager::app_Id = mAppId;
+            BaseAppState::app_Id = mAppId;
         }
 
         bool is_shouldendsession() const {
@@ -85,11 +85,11 @@ namespace cloudappclient {
         }
 
         void set_shouldendsession(bool shouldEndSession) {
-            BaseAppStateManager::shouldendsession = shouldEndSession;
+            BaseAppState::shouldendsession = shouldEndSession;
         }
 
         void set_task_process_callback(const TaskProcessCallback &taskProcessCallback) {
-            BaseAppStateManager::task_process_callback = taskProcessCallback;
+            BaseAppState::task_process_callback = taskProcessCallback;
         }
 
         MEDIA_STATE get_media_state() const {
@@ -97,7 +97,7 @@ namespace cloudappclient {
         }
 
         void set_media_state(MEDIA_STATE currentMediaState) {
-            BaseAppStateManager::media_state = currentMediaState;
+            BaseAppState::media_state = currentMediaState;
         }
 
         VOICE_STATE get_voice_state() const {
@@ -105,7 +105,7 @@ namespace cloudappclient {
         }
 
         void set_voice_state(VOICE_STATE currentVoiceState) {
-            BaseAppStateManager::voice_state = currentVoiceState;
+            BaseAppState::voice_state = currentVoiceState;
         }
 
         USER_MEDIA_CONTROL_TYPE get_user_media_contro_type() const {
@@ -113,7 +113,7 @@ namespace cloudappclient {
         }
 
         void set_user_control_type(USER_MEDIA_CONTROL_TYPE user_media_control_type1) {
-            BaseAppStateManager::user_media_control_type = user_media_control_type1;
+            BaseAppState::user_media_control_type = user_media_control_type1;
         }
 
         USER_VOICE_CONTROL_TYPE get_usr_media_type() const {
@@ -121,7 +121,7 @@ namespace cloudappclient {
         }
 
         void setUserVoiceControlType(USER_VOICE_CONTROL_TYPE user_voice_control_type1) {
-            BaseAppStateManager::user_voice_control_type = user_voice_control_type1;
+            BaseAppState::user_voice_control_type = user_voice_control_type1;
         }
 
 
@@ -142,9 +142,9 @@ namespace cloudappclient {
                     media_state = nullptr;
                     voice_state = nullptr;
                 }
-                BaseAppStateManager::action_node = actionNode;
-                BaseAppStateManager::app_Id = actionNode.getAppId();
-                BaseAppStateManager::shouldendsession = actionNode.isShouldEndSession();
+                BaseAppState::action_node = actionNode;
+                BaseAppState::app_Id = actionNode.getAppId();
+                BaseAppState::shouldendsession = actionNode.isShouldEndSession();
 
                 process_action_node(actionNode);
             }
@@ -154,7 +154,7 @@ namespace cloudappclient {
 
         void new_event_action_node(const ActionNode &actionNode) override {
             mutex_lock.lock();
-            LogUtil::log("form: " + getFormType() + "new_event_action_node actioNode : " + " media_state: " +
+            LogUtil::log("form: " + get_app_type() + "new_event_action_node actioNode : " + " media_state: " +
                          media_state + " voice_state " + voice_state);
             if (actionNode != nullptr) {
 
@@ -178,33 +178,12 @@ namespace cloudappclient {
             mutex_lock.unlock();
         }
 
-        void app_paused() override {
-            mutex_lock.lock();
-            LogUtil::log("form: " + getFormType() + " app_paused " + " media_state: " + media_state +
-                         " voice_state " + voice_state);
-            mutex_lock.unlock();
-        }
-
-        void app_resumed() override {
-            mutex_lock.lock();
-            LogUtil::log("form: " + getFormType() + " app_resumed " + " media_state: " + media_state +
-                         " voice_state " + voice_state);
-            mutex_lock.unlock();
-        }
-
-        void app_destroy() override {
-            mutex_lock.lock();
-            LogUtil::log("form: " + getFormType() + " app_destroy " + " media_state: " + media_state +
-                         " voice_state: " + voice_state);
-            mutex_lock.unlock();
-        }
-
         /** onMediaStateCallback **/
         void media_started() override {
             mutex_lock.lock();
             media_state = MEDIA_STATE::MEDIA_PLAY;
             LogUtil::log(
-                    "form: " + getFormType() + " media_started ! " + " media_state: " + media_state + " voice_state " +
+                    "form: " + get_app_type() + " media_started ! " + " media_state: " + media_state + " voice_state " +
                     voice_state);
             if (TextUtil::isEmpty(app_Id)) {
                 LogUtil::log(" appId is null !");
@@ -220,7 +199,7 @@ namespace cloudappclient {
             mutex_lock.lock();
             media_state = MEDIA_STATE::MEDIA_PAUSE;
             LogUtil::log(
-                    "form: " + getFormType() + " media_paused ! " + " media_state: " + media_state + " voice_state " +
+                    "form: " + get_app_type() + " media_paused ! " + " media_state: " + media_state + " voice_state " +
                     voice_state);
             if (TextUtil::isEmpty(app_Id)) {
                 LogUtil::log("appId is null");
@@ -235,7 +214,7 @@ namespace cloudappclient {
             mutex_lock.lock();
             media_state = MEDIA_RESUME;
             LogUtil::log(
-                    "form: " + getFormType() + " media_resumed ! " + " media_state: " + media_state + " voice_state " +
+                    "form: " + get_app_type() + " media_resumed ! " + " media_state: " + media_state + " voice_state " +
                     voice_state);
             mutex_lock.unlock();
         }
@@ -244,7 +223,7 @@ namespace cloudappclient {
             mutex_lock.lock();
             media_state = MEDIA_STOP;
             LogUtil::log(
-                    "form: " + getFormType() + " media_stopped ! " + " media_state: " + media_state + " voice_state " +
+                    "form: " + get_app_type() + " media_stopped ! " + " media_state: " + media_state + " voice_state " +
                     voice_state);
             if (shouldendsession) {
                 checkAppState();
@@ -264,7 +243,7 @@ namespace cloudappclient {
             mutex_lock.lock();
             media_state = MEDIA_ERROR;
             LogUtil::log(
-                    "form: " + getFormType() + " media_error ! " + " media_state: " + media_state + " voice_state " +
+                    "form: " + get_app_type() + " media_error ! " + " media_state: " + media_state + " voice_state " +
                     voice_state);
             //TODO promote error info
             /*if (errorCode == RKAudioPlayer.MEDIA_ERROR_TIME_OUT){
@@ -279,7 +258,7 @@ namespace cloudappclient {
             mutex_lock.lock();
             voice_state = VOICE_START;
             LogUtil::log(
-                    "form: " + getFormType() + " voice_started ! " + " media_state: " + media_state + " voice_state " +
+                    "form: " + get_app_type() + " voice_started ! " + " media_state: " + media_state + " voice_state " +
                     voice_state);
             if (TextUtil::isEmpty(app_Id)) {
                 LogUtil::log(" appId is null !");
@@ -294,7 +273,7 @@ namespace cloudappclient {
             mutex_lock.lock();
             voice_state = VOICE_PAUSE;
             LogUtil::log(
-                    "form: " + getFormType() + " voice_paused ! " + " media_state: " + media_state + " voice_state " +
+                    "form: " + get_app_type() + " voice_paused ! " + " media_state: " + media_state + " voice_state " +
                     voice_state);
             mutex_lock.unlock();
         }
@@ -303,7 +282,7 @@ namespace cloudappclient {
             mutex_lock.lock();
             voice_state = VOICE_STOP;
             LogUtil::log(
-                    "form: " + getFormType() + " voice_stopped ! " + " media_state: " + media_state + " voice_state " +
+                    "form: " + get_app_type() + " voice_stopped ! " + " media_state: " + media_state + " voice_state " +
                     voice_state);
             if (shouldendsession) {
                 checkAppState();
@@ -323,7 +302,7 @@ namespace cloudappclient {
             mutex_lock.lock();
             voice_state = VOICE_CANCLE;
             LogUtil::log(
-                    "form: " + getFormType() + " voice_cancled ! " + " media_state: " + media_state + " voice_state " +
+                    "form: " + get_app_type() + " voice_cancled ! " + " media_state: " + media_state + " voice_state " +
                     voice_state);
             checkAppState();
             mutex_lock.unlock();
@@ -333,14 +312,12 @@ namespace cloudappclient {
             mutex_lock.lock();
             voice_state = VOICE_ERROR;
             LogUtil::log(
-                    "form: " + getFormType() + " voice_error ! " + " media_state: " + media_state + " voice_state " +
+                    "form: " + get_app_type() + " voice_error ! " + " media_state: " + media_state + " voice_state " +
                     voice_state);
             //TODO promote voice error
 //            promoteErrorInfo(ErrorPromoter.ERROR_TYPE.TTS_ERROR);
             mutex_lock.unlock();
         }
-
-        virtual string getFormType();
 
     private:
         /**
@@ -384,7 +361,7 @@ namespace cloudappclient {
 
         const void checkAppState() {
             if (isStateInvalid() && &task_process_callback != nullptr) {
-                LogUtil::log("form: " + getFormType() + " voice stop , allTaskFinished ! finish app !");
+                LogUtil::log("form: " + get_app_type() + " voice stop , allTaskFinished ! finish app !");
                 task_process_callback.onAllTaskFinished();
             }
         }

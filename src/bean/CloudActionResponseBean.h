@@ -11,7 +11,7 @@
 using std::string;
 using map_string = std::map<string, string>;
 
-namespace cloudappclient {
+namespace CloudAppClient {
 
     class CloudActionResponseBean {
 

@@ -3,8 +3,9 @@
 //
 #include "../bean/ActionNode.h"
 
-namespace cloudappclient {
-    class AppStateCallBack {
+namespace CloudAppClient {
+
+    class IAppState {
     public:
         virtual void new_intent_action_node(const ActionNode &actionNode) = 0;
 
@@ -15,6 +16,9 @@ namespace cloudappclient {
         virtual void app_resumed() = 0;
 
         virtual void app_destroy() = 0;
+
+        virtual string get_app_type() = 0;
+
     };
 
     class MediaStateCallBack {

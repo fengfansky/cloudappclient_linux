@@ -2,24 +2,13 @@
 #include <boost/network/protocol/http/client.hpp>
 #include "../include/json.hpp"
 #include "proto/SendEvent.pb.h"
-#include "http/BaseParameter.h"
-#include "util/LogUtil.h"
 
 using std::string;
 using json = nlohmann::json;
+using namespace boost::network;
 
 int main(void) {
 
-    using namespace boost::network;
-
-    http::client client;
-    http::client::request request;
-
-    request << header("Connection", "close");
-    request << header("Accept", "text/plain");
-    request << header("Accept-Charset", "utf-8");
-    request << header("Cache-Control", "no-cache");
-    request << header("Authorization", params.getAuthorization());
 
      // 1. Parse a JSON string into DOM.
 //       auto jsonDom = json::parse("{  \n"

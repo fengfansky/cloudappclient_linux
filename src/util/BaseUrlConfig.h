@@ -7,7 +7,7 @@
 
 using std::string;
 
-namespace cloudappclient {
+namespace CloudAppClient {
 
     class BaseUrlConfig {
     public:

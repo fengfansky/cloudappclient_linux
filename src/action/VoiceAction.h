@@ -6,7 +6,7 @@
 #include "../util/LogUtil.h"
 #include "BaseAction.h"
 
-namespace cloudappclient {
+namespace CloudAppClient {
     template<class T>
     class VoiceAction : public BaseAction {
 
@@ -69,7 +69,7 @@ namespace cloudappclient {
 
         }
 
-        ACTION_TYPE &getActionType() override {
+        const ACTION_TYPE &getActionType() override {
             return ACTION_TYPE ::VOICE;
         }
 

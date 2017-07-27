@@ -6,7 +6,7 @@
 #include "../bean/BaseActionBean.h"
 
 using namespace std;
-namespace cloudappclient {
+namespace CloudAppClient {
     template<class T>
     class BaseAction {
 
@@ -69,7 +69,7 @@ namespace cloudappclient {
 
         virtual void backward() = 0;
 
-        virtual ACTION_TYPE &getActionType() = 0;
+        virtual const ACTION_TYPE &getActionType() = 0;
 
     };
 }

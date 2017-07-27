@@ -8,7 +8,7 @@
 
 using std::string;
 
-namespace cloudappclient {
+namespace CloudAppClient {
     class ActionBean {
 
     public:
