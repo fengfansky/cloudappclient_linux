@@ -20,12 +20,12 @@ namespace proto {
 
 namespace {
 
-const ::google::protobuf::Descriptor* SendEventRequest_descriptor_ = nullptr;
+const ::google::protobuf::Descriptor* SendEventRequest_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  SendEventRequest_reflection_ = nullptr;
-const ::google::protobuf::Descriptor* SendEvnetResponse_descriptor_ = nullptr;
+  SendEventRequest_reflection_ = NULL;
+const ::google::protobuf::Descriptor* SendEvnetResponse_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  SendEvnetResponse_reflection_ = nullptr;
+  SendEvnetResponse_reflection_ = NULL;
 
 }  // namespace
 
@@ -35,7 +35,7 @@ void protobuf_AssignDesc_SendEvent_2eproto() {
   const ::google::protobuf::FileDescriptor* file =
     ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
       "SendEvent.proto");
-  GOOGLE_CHECK(file != nullptr);
+  GOOGLE_CHECK(file != NULL);
   SendEventRequest_descriptor_ = file->message_type(0);
   static const int SendEventRequest_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SendEventRequest, appid_),
@@ -181,11 +181,11 @@ const ::google::protobuf::Descriptor* SendEventRequest::descriptor() {
 }
 
 const SendEventRequest& SendEventRequest::default_instance() {
-  if (default_instance_ == nullptr) protobuf_AddDesc_SendEvent_2eproto();
+  if (default_instance_ == NULL) protobuf_AddDesc_SendEvent_2eproto();
   return *default_instance_;
 }
 
-SendEventRequest* SendEventRequest::default_instance_ = nullptr;
+SendEventRequest* SendEventRequest::default_instance_ = NULL;
 
 SendEventRequest* SendEventRequest::New() const {
   return new SendEventRequest;
@@ -401,7 +401,7 @@ void SendEventRequest::MergeFrom(const ::google::protobuf::Message& from) {
   const SendEventRequest* source =
     ::google::protobuf::internal::dynamic_cast_if_available<const SendEventRequest*>(
       &from);
-  if (source == nullptr) {
+  if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
     MergeFrom(*source);
@@ -511,11 +511,11 @@ const ::google::protobuf::Descriptor* SendEvnetResponse::descriptor() {
 }
 
 const SendEvnetResponse& SendEvnetResponse::default_instance() {
-  if (default_instance_ == nullptr) protobuf_AddDesc_SendEvent_2eproto();
+  if (default_instance_ == NULL) protobuf_AddDesc_SendEvent_2eproto();
   return *default_instance_;
 }
 
-SendEvnetResponse* SendEvnetResponse::default_instance_ = nullptr;
+SendEvnetResponse* SendEvnetResponse::default_instance_ = NULL;
 
 SendEvnetResponse* SendEvnetResponse::New() const {
   return new SendEvnetResponse;
@@ -635,7 +635,7 @@ void SendEvnetResponse::MergeFrom(const ::google::protobuf::Message& from) {
   const SendEvnetResponse* source =
     ::google::protobuf::internal::dynamic_cast_if_available<const SendEvnetResponse*>(
       &from);
-  if (source == nullptr) {
+  if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
     MergeFrom(*source);

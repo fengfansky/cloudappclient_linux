@@ -1,6 +1,7 @@
 //
 // Created by Fan Feng on 2017/7/19.
 //
+#pragma once
 
 #include "../action/MediaAction.h"
 #include "../action/VoiceAction.h"
@@ -54,7 +55,7 @@ namespace CloudAppClient {
         string app_Id = nullptr;
         bool shouldendsession;
 
-        mutex mutex_lock;
+        std::mutex mutex_lock;
 
         MEDIA_STATE media_state;
         VOICE_STATE voice_state;
@@ -130,13 +131,13 @@ namespace CloudAppClient {
         void new_intent_action_node(const ActionNode &actionNode) override {
             mutex_lock.lock();
             if (&actionNode != nullptr) {
-                if (TextUtil::isEmpty(actionNode.getAppId())) {
+                if (actionNode.getAppId().empty()) {
                     checkAppState();
                     return;
                 }
 
                 if (!strcmp(app_Id, actionNode.getAppId())) {
-                    LogUtil::log("new_event_action_node the appId is the not the same with lastAppId");
+                    rokid::log::Log::d(TAG, "new_event_action_node the appId is the not the same with lastAppId");
                     MediaAction::getInstance()->stopPlay();
                     VoiceAction::getInstance()->stopPlay();
                     media_state = nullptr;
@@ -154,18 +155,19 @@ namespace CloudAppClient {
 
         void new_event_action_node(const ActionNode &actionNode) override {
             mutex_lock.lock();
-            LogUtil::log("form: " + get_app_type() + "new_event_action_node actioNode : " + " media_state: " +
-                         media_state + " voice_state " + voice_state);
+            rokid::log::Log::d(TAG,
+                               ("form: " + get_app_type() + "new_event_action_node actioNode : " + " media_state: " +
+                               media_state + " voice_state " + voice_state).c_str());
             if (actionNode != nullptr) {
 
-                if (TextUtil::isEmpty(actionNode.getAppId())) {
-                    LogUtil::log("new cloudAppId is null !");
+                if (actionNode.getAppId().empty()) {
+                    rokid::log::Log::d(TAG, "new cloudAppId is null !");
                     checkAppState();
                     return;
                 }
 
                 if (strcmp(actionNode.getAppId(), app_Id)) {
-                    LogUtil::log("new_event_action_node the appId is the not the same with lastAppId");
+                    rokid::log::Log::d(TAG, "new_event_action_node the appId is the not the same with lastAppId");
                     checkAppState();
                     return;
                 }
@@ -182,11 +184,12 @@ namespace CloudAppClient {
         void media_started() override {
             mutex_lock.lock();
             media_state = MEDIA_STATE::MEDIA_PLAY;
-            LogUtil::log(
-                    "form: " + get_app_type() + " media_started ! " + " media_state: " + media_state + " voice_state " +
-                    voice_state);
-            if (TextUtil::isEmpty(app_Id)) {
-                LogUtil::log(" appId is null !");
+            rokid::log::Log::d(TAG,
+                               ("form: " + get_app_type() + " media_started ! " + " media_state: " + media_state +
+                               " voice_state " +
+                               voice_state).c_str());
+            if (app_Id.empty()) {
+                rokid::log::Log::d(TAG, " appId is null !");
                 return;
             }
             //TODO execute reporter
@@ -198,11 +201,12 @@ namespace CloudAppClient {
         void media_paused(const int position) override {
             mutex_lock.lock();
             media_state = MEDIA_STATE::MEDIA_PAUSE;
-            LogUtil::log(
-                    "form: " + get_app_type() + " media_paused ! " + " media_state: " + media_state + " voice_state " +
-                    voice_state);
-            if (TextUtil::isEmpty(app_Id)) {
-                LogUtil::log("appId is null");
+            rokid::log::Log::d(TAG,
+                               ("form: " + get_app_type() + " media_paused ! " + " media_state: " + media_state +
+                               " voice_state " +
+                               voice_state).c_str());
+            if (app_Id.empty()) {
+                rokid::log::Log::d(TAG, "appId is null");
                 return;
             }
             //TODO execute reporter
@@ -213,23 +217,25 @@ namespace CloudAppClient {
         void media_resumed() override {
             mutex_lock.lock();
             media_state = MEDIA_RESUME;
-            LogUtil::log(
-                    "form: " + get_app_type() + " media_resumed ! " + " media_state: " + media_state + " voice_state " +
-                    voice_state);
+            rokid::log::Log::d(TAG,
+                               ("form: " + get_app_type() + " media_resumed ! " + " media_state: " + media_state +
+                               " voice_state " +
+                               voice_state).c_str());
             mutex_lock.unlock();
         }
 
         void media_stopped() override {
             mutex_lock.lock();
             media_state = MEDIA_STOP;
-            LogUtil::log(
-                    "form: " + get_app_type() + " media_stopped ! " + " media_state: " + media_state + " voice_state " +
-                    voice_state);
+            rokid::log::Log::d(TAG,
+                               ("form: " + get_app_type() + " media_stopped ! " + " media_state: " + media_state +
+                               " voice_state " +
+                               voice_state).c_str());
             if (shouldendsession) {
                 checkAppState();
             } else {
-                if (TextUtil::isEmpty(app_Id)) {
-                    LogUtil::log(" appId is null !");
+                if (app_Id.empty()) {
+                    rokid::log::Log::d(TAG, " appId is null !");
                     return;
                 }
 
@@ -242,9 +248,10 @@ namespace CloudAppClient {
         void media_error(const int errorCode) override {
             mutex_lock.lock();
             media_state = MEDIA_ERROR;
-            LogUtil::log(
-                    "form: " + get_app_type() + " media_error ! " + " media_state: " + media_state + " voice_state " +
-                    voice_state);
+            rokid::log::Log::d(TAG,
+                               ("form: " + get_app_type() + " media_error ! " + " media_state: " + media_state +
+                               " voice_state " +
+                               voice_state).c_str());
             //TODO promote error info
             /*if (errorCode == RKAudioPlayer.MEDIA_ERROR_TIME_OUT){
                 promoteErrorInfo(ErrorPromoter.ERROR_TYPE.MEDIA_TIME_OUT);
@@ -257,11 +264,12 @@ namespace CloudAppClient {
         void voice_started() override {
             mutex_lock.lock();
             voice_state = VOICE_START;
-            LogUtil::log(
-                    "form: " + get_app_type() + " voice_started ! " + " media_state: " + media_state + " voice_state " +
-                    voice_state);
-            if (TextUtil::isEmpty(app_Id)) {
-                LogUtil::log(" appId is null !");
+            rokid::log::Log::d(TAG,
+                               ("form: " + get_app_type() + " voice_started ! " + " media_state: " + media_state +
+                               " voice_state " +
+                               voice_state).c_str());
+            if (app_Id.empty()) {
+                rokid::log::Log::d(TAG, " appId is null !");
                 return;
             }
             //TODO execute reporter
@@ -272,23 +280,25 @@ namespace CloudAppClient {
         void voice_paused() override {
             mutex_lock.lock();
             voice_state = VOICE_PAUSE;
-            LogUtil::log(
-                    "form: " + get_app_type() + " voice_paused ! " + " media_state: " + media_state + " voice_state " +
-                    voice_state);
+            rokid::log::Log::d(TAG,
+                               ("form: " + get_app_type() + " voice_paused ! " + " media_state: " + media_state +
+                               " voice_state " +
+                               voice_state).c_str());
             mutex_lock.unlock();
         }
 
         void voice_stopped() override {
             mutex_lock.lock();
             voice_state = VOICE_STOP;
-            LogUtil::log(
-                    "form: " + get_app_type() + " voice_stopped ! " + " media_state: " + media_state + " voice_state " +
-                    voice_state);
+            rokid::log::Log::d(TAG,
+                               ("form: " + get_app_type() + " voice_stopped ! " + " media_state: " + media_state +
+                               " voice_state " +
+                               voice_state).c_str());
             if (shouldendsession) {
                 checkAppState();
             } else {
-                if (TextUtil::isEmpty(app_Id)) {
-                    LogUtil::log(" appId is null !");
+                if (app_Id.empty()) {
+                    rokid::log::Log::d(TAG, " appId is null !");
                     checkAppState();
                     return;
                 }
@@ -301,9 +311,10 @@ namespace CloudAppClient {
         void voice_cancled() override {
             mutex_lock.lock();
             voice_state = VOICE_CANCLE;
-            LogUtil::log(
-                    "form: " + get_app_type() + " voice_cancled ! " + " media_state: " + media_state + " voice_state " +
-                    voice_state);
+            rokid::log::Log::d(TAG,
+                               ("form: " + get_app_type() + " voice_cancled ! " + " media_state: " + media_state +
+                               " voice_state " +
+                               voice_state).c_str();
             checkAppState();
             mutex_lock.unlock();
         }
@@ -311,9 +322,10 @@ namespace CloudAppClient {
         void voice_error() override {
             mutex_lock.lock();
             voice_state = VOICE_ERROR;
-            LogUtil::log(
-                    "form: " + get_app_type() + " voice_error ! " + " media_state: " + media_state + " voice_state " +
-                    voice_state);
+            rokid::log::Log::d(TAG,
+                               ("form: " + get_app_type() + " voice_error ! " + " media_state: " + media_state +
+                               " voice_state " +
+                               voice_state).c_str());
             //TODO promote voice error
 //            promoteErrorInfo(ErrorPromoter.ERROR_TYPE.TTS_ERROR);
             mutex_lock.unlock();
@@ -329,7 +341,7 @@ namespace CloudAppClient {
         const void process_action_node(const ActionNode &actionNode) {
 
             if (strcmp(ActionBean::TYPE_EXIT, actionNode.getActionType())) {
-                LogUtil::log("current response is a INTENT EXIT - Finish Activity");
+                rokid::log::Log::d(TAG, "current response is a INTENT EXIT - Finish Activity");
                 finishActivity();
                 return;
             }
@@ -361,16 +373,17 @@ namespace CloudAppClient {
 
         const void checkAppState() {
             if (isStateInvalid() && &task_process_callback != nullptr) {
-                LogUtil::log("form: " + get_app_type() + " voice stop , allTaskFinished ! finish app !");
+                rokid::log::Log::d(TAG, ("form: " + get_app_type() + " voice stop , allTaskFinished ! finish app !").c_str());
                 task_process_callback.onAllTaskFinished();
             }
         }
 
         void finishActivity() {
-            if (&task_process_callback != nullptr){
+            if (&task_process_callback != nullptr) {
                 task_process_callback.onExitCallback();
             }
         }
 
+        const char *TAG = "BaseAppState";
     };
 }

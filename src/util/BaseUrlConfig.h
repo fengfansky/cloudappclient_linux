@@ -1,9 +1,9 @@
 //
 // Created by Fan Feng on 2017/7/22.
 //
+#pragma once
 
-
-#include <string>
+#include "../action/BaseAction.h"
 
 using std::string;
 

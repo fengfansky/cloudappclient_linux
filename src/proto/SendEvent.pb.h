@@ -297,7 +297,7 @@ inline ::std::string* SendEventRequest::mutable_appid() {
 inline ::std::string* SendEventRequest::release_appid() {
   clear_has_appid();
   if (appid_ == &::google::protobuf::internal::kEmptyString) {
-    return nullptr;
+    return NULL;
   } else {
     ::std::string* temp = appid_;
     appid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
@@ -367,7 +367,7 @@ inline ::std::string* SendEventRequest::mutable_event() {
 inline ::std::string* SendEventRequest::release_event() {
   clear_has_event();
   if (event_ == &::google::protobuf::internal::kEmptyString) {
-    return nullptr;
+    return NULL;
   } else {
     ::std::string* temp = event_;
     event_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
@@ -437,7 +437,7 @@ inline ::std::string* SendEventRequest::mutable_extra() {
 inline ::std::string* SendEventRequest::release_extra() {
   clear_has_extra();
   if (extra_ == &::google::protobuf::internal::kEmptyString) {
-    return nullptr;
+    return NULL;
   } else {
     ::std::string* temp = extra_;
     extra_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
@@ -511,7 +511,7 @@ inline ::std::string* SendEvnetResponse::mutable_response() {
 inline ::std::string* SendEvnetResponse::release_response() {
   clear_has_response();
   if (response_ == &::google::protobuf::internal::kEmptyString) {
-    return nullptr;
+    return NULL;
   } else {
     ::std::string* temp = response_;
     response_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);

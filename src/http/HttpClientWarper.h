@@ -1,15 +1,13 @@
 //
 // Created by Fan Feng on 2017/7/26.
 //
+#pragma once
 
-#include <boost/network/protocol/http/client.hpp>
 #include <google/protobuf/message_lite.h>
 #include <string>
 #include "BaseParameter.h"
-#include "../proto/SendEvent.pb.h"
-#include "../util/LogUtil.h"
+//#include "../proto/SendEvent.pb.h"
 
-using namespace boost::network;
 
 namespace CloudAppClient {
 
@@ -40,23 +38,32 @@ namespace CloudAppClient {
             }
             return instance;
         }
-        const static send_event_request(const std::string &url, const BaseParameter &parameter, const proto::SendEventRequest send_event_request){
 
-            http::client client;
+
+ /*       const static send_event_request(const std::string &url, const BaseParameter &parameter, const proto::SendEventRequest send_event_request){
+
+          *//*  http::client client;
+            http::client_options options;
             http::client::request client_request;
             http::client::response client_response;
             std::ostream *ostream;
+
+            options.timeout(CONNECTION_TIME_OUT);
 
             client_request << header("Accept", "text/plain");
             client_request << header("Accept-Charset", "utf-8");
             client_request << header("Cache-Control", "no-cache");
             send_event_request.SerializeToOstream(ostream);
             client_request.uri(url);
-            client_response = client.post(client_request);
-            LogUtil::log("response : " + body(client_response.));
+            client_request.source();
+            client_request -> body();
+
+            client_response = client.post(client_request);*//*
+
+//            rokid::log::Log::d(TAG,"response : " + body(client_response));
         }
 
 
-    };
+    };*/
 
 }

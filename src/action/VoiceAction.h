@@ -1,9 +1,9 @@
 //
 // Created by Fan Feng on 2017/7/16.
 //
+#pragma once
 
 #include <cstdlib>
-#include "../util/LogUtil.h"
 #include "BaseAction.h"
 
 namespace CloudAppClient {

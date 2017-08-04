@@ -1,30 +1,33 @@
-#include <iostream>
-#include <boost/network/protocol/http/client.hpp>
-#include "../include/json.hpp"
-#include "proto/SendEvent.pb.h"
+#include "json/json.h"
+//#include "parser/nlp_parser.h"
+#include "util/rlog.h"
 
 using std::string;
 using json = nlohmann::json;
-using namespace boost::network;
 
 int main(void) {
 
+        const string nlp_str = "{  \\n\"\n"
+                "                                                    \"   \\\"nlp\\\":{  \\n\"\n"
+                "                                                    \"      \\\"appId\\\":\\\"R4AB842832E84BBD8B2DD6537DAFF790\\\",\\n\"\n"
+                "                                                    \"      \\\"cloud\\\":true,\\n\"\n"
+                "                                                    \"      \\\"intent\\\":\\\"playnews\\\",\\n\"\n"
+                "                                                    \"      \\\"pattern\\\":\\\"($iwant|$can?$forMe|$can)?$play$newsmode?的?$newstype?类?$keyword\\\",\\n\"\n"
+                "                                                    \"      \\\"slots\\\":{  \\n\"\n"
+                "                                                    \"         \\\"keyword\\\":\\\"新闻\\\"\\n\"\n"
+                "                                                    \"      }\\n\"\n"
+                "                                                    \"   }\\n\"\n"
+                "                                                    \"}";
 
-     // 1. Parse a JSON string into DOM.
-//       auto jsonDom = json::parse("{  \n"
-//                                                    "   \"nlp\":{  \n"
-//                                                    "      \"appId\":\"R4AB842832E84BBD8B2DD6537DAFF790\",\n"
-//                                                    "      \"cloud\":true,\n"
-//                                                    "      \"intent\":\"playnews\",\n"
-//                                                    "      \"pattern\":\"($iwant|$can?$forMe|$can)?$play$newsmode?的?$newstype?类?$keyword\",\n"
-//                                                    "      \"slots\":{  \n"
-//                                                    "         \"keyword\":\"新闻\"\n"
-//                                                    "      }\n"
-//                                                    "   }\n"
-//                                                    "}");
+//        CloudAppClient::NLPBean nlpBean;
 //
-//
-//       LogUtil::log(jsonDom["nlp"]["appId"].get<string>());
+//        CloudAppClient::nlp_parser::string_to_nlp(nlp_str, nlpBean);
+
+
+       rokid::log::Log::d("test_json",nlp_str.c_str());
+
+    //2. test network
+
 
     return 0;
 }

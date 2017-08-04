@@ -1,8 +1,8 @@
 //
 // Created by Fan Feng on 2017/7/25.
 //
+#pragma once
 
-#include <boost/tr1/memory.hpp>
 #include "SceneAppState.h"
 #include "CutAppState.h"
 
@@ -37,33 +37,33 @@ namespace CloudAppClient {
     public:
         void processSceneEnter(const ActionNode &actionNode) {
             if (cutAppState != nullptr) {
-                LogUtil::log("processSceneEnter cutAppState exit");
+                rokid::log::Log::d(TAG,"processSceneEnter cutAppState exit");
                 cutAppState->app_destroy();
                 cutAppState = nullptr;
             }
-            LogUtil::log("processSceneEnter sceneAppState new action node");
+            rokid::log::Log::d(TAG,"processSceneEnter sceneAppState new action node");
             sceneAppState = new std::shared_ptr<SceneAppState>();
             sceneAppState->new_intent_action_node(actionNode);
         }
 
         void processCutEnter(const ActionNode &actionNode) {
             if (sceneAppState != nullptr){
-                LogUtil::log("processCutEnter sceneAppState pause");
+                rokid::log::Log::d(TAG,"processCutEnter sceneAppState pause");
                 sceneAppState->app_paused();
             }
-            LogUtil::log("processCutEnter cutAppState new action node");
+            rokid::log::Log::d(TAG,"processCutEnter cutAppState new action node");
             cutAppState = new std::shared_ptr<CutAppState>();
             cutAppState->new_intent_action_node(actionNode);
         }
 
         void processSceneExit() {
             if (cutAppState != nullptr){
-                LogUtil::log("error : processSceneExit cutAppState is not null ! ");
+                rokid::log::Log::d(TAG,"error : processSceneExit cutAppState is not null ! ");
                 cutAppState -> app_destroy();
                 cutAppState = nullptr;
             }
             if (sceneAppState != nullptr){
-                LogUtil::log("processSceneExit sceneAppState exit");
+                rokid::log::Log::d(TAG,"processSceneExit sceneAppState exit");
                 sceneAppState -> app_destroy();
                 sceneAppState = nullptr;
             }
@@ -71,13 +71,13 @@ namespace CloudAppClient {
 
         void processCutExit() {
             if (cutAppState == nullptr){
-                LogUtil::log("error : processCutExit cutAppState is null ! ");
+                rokid::log::Log::d(TAG,"error : processCutExit cutAppState is null ! ");
             } else{
-                LogUtil::log("processCutExit cutAppState exit");
+                rokid::log::Log::d(TAG,"processCutExit cutAppState exit");
                 cutAppState->app_destroy();
                 cutAppState = nullptr;
                 if (sceneAppState != nullptr){
-                    LogUtil::log("error : processCutExit sceneAppState not null and resume ! ");
+                    rokid::log::Log::d(TAG,"error : processCutExit sceneAppState not null and resume ! ");
                     sceneAppState->app_resumed();
                 }
             }

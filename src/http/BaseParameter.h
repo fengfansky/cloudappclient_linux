@@ -1,6 +1,10 @@
 //
 // Created by Fan Feng on 2017/7/21.
 //
+#pragma once
+
+#include <string>
+#include <map>
 #include "../util/LinkedHashMap.h"
 
 using std::string;

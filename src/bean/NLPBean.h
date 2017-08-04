@@ -1,6 +1,7 @@
 //
 // Created by Fan Feng on 2017/7/13->
 //
+#pragma once
 
 #include <iostream>
 #include <map>
@@ -66,9 +67,71 @@ namespace CloudAppClient {
         /**
         * indicates the nlp is a cloud call
         */
-        bool cloud;
+        bool cloud = true;
 
     public:
+        NLPBean() {}
+
+        NLPBean(const string &asr, const string &appId, const string &intent, const string &confirm,
+                const map_string &slots, int posStart, int posEnd, float confidence, const string &pattern,
+                const string &version, const string &voice, const string &forwardContent, bool cloud) : asr(asr),
+                                                                                                        appId(appId),
+                                                                                                        intent(intent),
+                                                                                                        confirm(confirm),
+                                                                                                        slots(slots),
+                                                                                                        posStart(
+                                                                                                                posStart),
+                                                                                                        posEnd(posEnd),
+                                                                                                        confidence(
+                                                                                                                confidence),
+                                                                                                        pattern(pattern),
+                                                                                                        version(version),
+                                                                                                        voice(voice),
+                                                                                                        forwardContent(
+                                                                                                                forwardContent),
+                                                                                                        cloud(cloud) {}
+
+        virtual ~NLPBean() {
+
+        }
+
+        bool operator==(const NLPBean &rhs) const {
+            return asr == rhs.asr &&
+                   appId == rhs.appId &&
+                   intent == rhs.intent &&
+                   confirm == rhs.confirm &&
+                   slots == rhs.slots &&
+                   posStart == rhs.posStart &&
+                   posEnd == rhs.posEnd &&
+                   confidence == rhs.confidence &&
+                   pattern == rhs.pattern &&
+                   version == rhs.version &&
+                   voice == rhs.voice &&
+                   forwardContent == rhs.forwardContent &&
+                   cloud == rhs.cloud;
+        }
+
+        bool operator!=(const NLPBean &rhs) const {
+            return !(rhs == *this);
+        }
+
+        NLPBean& operator=(const NLPBean &rhs){
+            asr = rhs.asr;
+            appId = rhs.appId;
+            intent = rhs.intent;
+            confirm = rhs.confirm;
+            slots = rhs.slots;
+            posStart = rhs.posStart;
+            posEnd = rhs.posEnd;
+            confidence = rhs.confidence;
+            pattern = rhs.pattern;
+            version = rhs.version;
+            voice = rhs.voice;
+            forwardContent = rhs.forwardContent;
+            cloud = rhs.cloud;
+            return  *this;
+        }
+
         const string &getAsr() const {
             return asr;
         }

@@ -1,6 +1,7 @@
 //
 // Created by Fan Feng on 2017/7/19.
 //
+#pragma once
 
 #include <string>
 #include "VoiceBean.h"
@@ -12,20 +13,20 @@ namespace CloudAppClient {
     class ActionBean {
 
     public:
-        static const string PROTOCOL_VERSION = "2.0.0";
+         static const string PROTOCOL_VERSION = "2.0.0";
         /**
 * When type is NORMAL , voice , display and media will be executed concurrently
 */
-        static const string TYPE_NORMAL = "NORMAL";
+         static const string TYPE_NORMAL = "NORMAL";
         /**
          * When type is EXIT , the action will be shut down immediately.
          * In this case, voice , display and media will be ignored.
          */
-        static const string TYPE_EXIT = "EXIT";
+         static const string TYPE_EXIT = "EXIT";
 
-        static const string FORM_SCENE = "scene";
-        static const string FORM_CUT = "cut";
-        static const string FORM_SERVICE = "service";
+         static const string FORM_SCENE = "scene";
+         static const string FORM_CUT = "cut";
+         static const string FORM_SERVICE = "service";
 
     private:
         /**
@@ -37,9 +38,9 @@ namespace CloudAppClient {
          */
         string type;
         /**
-         * 表明当此次返回的action执行完后 CloudAppClient 是否要退出，同时，当 shouldEndSession 为 true     * 时，CloudAppClient 将会忽略 EventRequests，即在action执行过程中不会产生 EventRequest。
+         * 表明当此次返回的action执行完后 CloudAppClient 是否要退出，同时，当 shouldEndSession 为 true     * 时，parser 将会忽略 EventRequests，即在action执行过程中不会产生 EventRequest。
          */
-        bool shouldEndSession;
+        bool shouldEndSession = true;
         /**
         * 当前action的展现形式：scene、cut、service。scene的action会在被打断后压栈，cut的action会在被打    * 断后直接结束，service会在后台执行，但没有任何界面。该字段在技能创建时被确定，无法由cloud app更改。
         */
@@ -52,6 +53,42 @@ namespace CloudAppClient {
         //TODO display and confirm
 
     public:
+
+        ActionBean() {}
+
+        ActionBean(const string &version, const string &type, bool shouldEndSession, const string &form,
+                   const VoiceBean &voice, const MediaBean &media) : version(version), type(type),
+                                                                     shouldEndSession(shouldEndSession), form(form),
+                                                                     voice(voice), media(media) {}
+
+
+        virtual ~ActionBean() {
+
+        }
+
+        bool operator==(const ActionBean &rhs) const {
+            return version == rhs.version &&
+                   type == rhs.type &&
+                   shouldEndSession == rhs.shouldEndSession &&
+                   form == rhs.form &&
+                   voice == rhs.voice &&
+                   media == rhs.media;
+        }
+
+        bool operator!=(const ActionBean &rhs) const {
+            return !(rhs == *this);
+        }
+
+        ActionBean&operator=(const ActionBean &rhs){
+            version = rhs.version;
+            type = rhs.type;
+            shouldEndSession = rhs.shouldEndSession;
+            form = rhs.form;
+            voice = rhs.voice;
+            media = rhs.media;
+            return *this;
+        }
+
         const string &getVersion() const {
             return version;
         }

@@ -1,16 +1,21 @@
 //
 // Created by Fan Feng on 2017/7/22.
 //
+#pragma once
 
 #include <iostream>
+#include "../util/rlog.h"
 #include "../bean/BaseActionBean.h"
 
-using namespace std;
+using string = std::string;
+
 namespace CloudAppClient {
     template<class T>
     class BaseAction {
 
     public:
+        const char* TAG = "BaseAction";
+
         enum ACTION_TYPE {
             MEDIA,
             VOICE
@@ -21,7 +26,7 @@ namespace CloudAppClient {
         virtual ~BaseAction();
 
         virtual void processAction(const T &actionBean) {
-            LogUtil::log(getActionType() + " processAction + actionBean : " + actionBean);
+            rokid::log::Log::d(TAG, getActionType() + " processAction + actionBean : " + actionBean);
 
             if (actionBean == nullptr) {
                 std::cout << getActionType() + " processAction actionBean is  null! " << std::endl;
@@ -29,12 +34,12 @@ namespace CloudAppClient {
             }
             string action = actionBean.getAction();
 
-            if (TextUtil::isEmpty(action)) {
-                LogUtil::log(getActionType() + " action is null!");
+            if (action.empty()) {
+                rokid::log::Log::d(TAG, getActionType() + " action is null!");
                 return;
             }
 
-            if (strcmp(action, BaseActionBean::ACTION_PLAY)) {
+            if (strcmp(action, BaseActionBean::ACTION_PLAY) == 0) {
                 userStartPlay(actionBean);
             } else if (strcmp(action, BaseActionBean::ACTION_PAUSE)) {
                 userPausedPlay();
@@ -47,7 +52,7 @@ namespace CloudAppClient {
             } else if (strcmp(action, BaseActionBean::ACTION_BACKWARD)) {
                 backward();
             } else {
-                LogUtil::log(" invalidate action ! " + action);
+                rokid::log::Log::d(TAG, (" invalidate action ! " + action).c_str());
             }
         };
 

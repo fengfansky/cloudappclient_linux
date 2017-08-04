@@ -1,6 +1,8 @@
 //
 // Created by Fan Feng on 2017/7/16.
 //
+#pragma once
+
 #include "../bean/ActionNode.h"
 
 namespace CloudAppClient {
