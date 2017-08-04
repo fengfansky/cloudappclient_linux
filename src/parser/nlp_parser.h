@@ -8,8 +8,6 @@
 
 namespace CloudAppClient {
 
-    const static char* TAG = "action_parser";
-
     class nlp_parser {
 
     public:

@@ -13,20 +13,20 @@ namespace CloudAppClient {
     class ActionBean {
 
     public:
-         static const string PROTOCOL_VERSION = "2.0.0";
+          const string PROTOCOL_VERSION = "2.0.0";
         /**
 * When type is NORMAL , voice , display and media will be executed concurrently
 */
-         static const string TYPE_NORMAL = "NORMAL";
+          const string TYPE_NORMAL = "NORMAL";
         /**
          * When type is EXIT , the action will be shut down immediately.
          * In this case, voice , display and media will be ignored.
          */
-         static const string TYPE_EXIT = "EXIT";
+          const string TYPE_EXIT = "EXIT";
 
-         static const string FORM_SCENE = "scene";
-         static const string FORM_CUT = "cut";
-         static const string FORM_SERVICE = "service";
+          const string FORM_SCENE = "scene";
+          const string FORM_CUT = "cut";
+          const string FORM_SERVICE = "service";
 
     private:
         /**

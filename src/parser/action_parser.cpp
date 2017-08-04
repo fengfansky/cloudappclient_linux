@@ -7,6 +7,8 @@
 
 namespace CloudAppClient {
 
+    const char* TAG = "action_parser";
+
     bool action_parser::string_to_action(const std::string &action_str, CloudActionResponseBean &action_bean) {
 
         rokid::log::Log::d(TAG, " parse action ");

@@ -8,6 +8,7 @@
 
 namespace CloudAppClient {
 
+
     class action_parser {
 
     public:
@@ -15,8 +16,6 @@ namespace CloudAppClient {
         action_parser() {}
 
         virtual ~action_parser() {}
-
-        static const char* TAG = "action_parser";
 
         static bool string_to_action(const std::string &action_str, CloudActionResponseBean& action_bean);
 

@@ -8,6 +8,8 @@
 
 namespace CloudAppClient {
 
+    const static char* TAG = "action_parser";
+
     bool nlp_parser::string_to_nlp(const std::string &nlp_string, NLPBean &nlp_bean) {
 
         rokid::log::Log::d(TAG, "parse nlp ");

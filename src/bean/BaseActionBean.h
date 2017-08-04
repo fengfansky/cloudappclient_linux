@@ -12,12 +12,12 @@ namespace CloudAppClient{
     class BaseActionBean {
 
     public:
-         static const string ACTION_PLAY = "PLAY";
-         static const string ACTION_PAUSE = "PAUSE";
-         static const string ACTION_RESUME = "RESUME";
-         static const string ACTION_STOP = "STOP";
-         static const string ACTION_FORWARD = "FORWARD";
-         static const string ACTION_BACKWARD = "BACKWARD";
+          const string ACTION_PLAY = "PLAY";
+          const string ACTION_PAUSE = "PAUSE";
+          const string ACTION_RESUME = "RESUME";
+          const string ACTION_STOP = "STOP";
+          const string ACTION_FORWARD = "FORWARD";
+          const string ACTION_BACKWARD = "BACKWARD";
 
         string action;
 

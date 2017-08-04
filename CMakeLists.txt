@@ -9,11 +9,33 @@ set(SOURCE_FILES
         src/action/MediaAction.h
         src/action/VoiceAction.h
         src/bean/ActionBean.h
-        src/bean/ActionNode.h
         src/bean/BaseActionBean.h
+        src/bean/CloudActionResponseBean.h
+        src/bean/CommonResponseBean.h
+        src/bean/MediaBean.h
+        src/bean/NLPBean.h
+        src/bean/ResponseBean.h
+        src/bean/SessionBean.h
+        src/bean/VoiceBean.h
+        src/http/BaseParameter.h
+        src/http/HttpClientWarper.h
+        src/json/json.h
+        src/parser/action_parser.h
+        src/parser/action_parser.cpp
         src/parser/nlp_parser.h
         src/parser/nlp_parser.cpp
-        src
+#        src/proto/SendEvent.pb.h
+#        src/proto/SendEvent.pb.cc
+        src/reporter/BaseReporter.h
+        src/state/AppStateMachine.h
+        src/state/BaseAppState.h
+        src/state/CutAppState.h
+        src/state/SceneAppState.h
+        src/state/StateCallback.h
+        src/util/BaseUrlConfig.h
+        src/util/LinkedHashMap.h
+        src/util/rlog.h
+        src/util/log.cc
         )
 
 #set ( CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} ~/cpp-netlib-build )
