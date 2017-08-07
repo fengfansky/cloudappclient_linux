@@ -80,6 +80,7 @@ namespace CloudAppClient {
         string resType;
 
 //        CardBean<T> card;
+
         ActionBean action;
 
     public:

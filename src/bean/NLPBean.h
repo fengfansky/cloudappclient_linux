@@ -72,25 +72,6 @@ namespace CloudAppClient {
     public:
         NLPBean() {}
 
-        NLPBean(const string &asr, const string &appId, const string &intent, const string &confirm,
-                const map_string &slots, int posStart, int posEnd, float confidence, const string &pattern,
-                const string &version, const string &voice, const string &forwardContent, bool cloud) : asr(asr),
-                                                                                                        appId(appId),
-                                                                                                        intent(intent),
-                                                                                                        confirm(confirm),
-                                                                                                        slots(slots),
-                                                                                                        posStart(
-                                                                                                                posStart),
-                                                                                                        posEnd(posEnd),
-                                                                                                        confidence(
-                                                                                                                confidence),
-                                                                                                        pattern(pattern),
-                                                                                                        version(version),
-                                                                                                        voice(voice),
-                                                                                                        forwardContent(
-                                                                                                                forwardContent),
-                                                                                                        cloud(cloud) {}
-
         virtual ~NLPBean() {
 
         }

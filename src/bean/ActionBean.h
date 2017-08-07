@@ -6,6 +6,8 @@
 #include <string>
 #include "VoiceBean.h"
 #include "MediaBean.h"
+#include "ConfirmBean.h"
+#include "PickupBean.h"
 
 using std::string;
 
@@ -13,20 +15,20 @@ namespace CloudAppClient {
     class ActionBean {
 
     public:
-          const string PROTOCOL_VERSION = "2.0.0";
+        static constexpr const char* PROTOCOL_VERSION = "2.0.0";
         /**
 * When type is NORMAL , voice , display and media will be executed concurrently
 */
-          const string TYPE_NORMAL = "NORMAL";
+        static constexpr const char* TYPE_NORMAL = "NORMAL";
         /**
          * When type is EXIT , the action will be shut down immediately.
          * In this case, voice , display and media will be ignored.
          */
-          const string TYPE_EXIT = "EXIT";
+        static constexpr const char* TYPE_EXIT = "EXIT";
 
-          const string FORM_SCENE = "scene";
-          const string FORM_CUT = "cut";
-          const string FORM_SERVICE = "service";
+        static constexpr const char* FORM_SCENE = "scene";
+        static constexpr const char* FORM_CUT = "cut";
+        static constexpr const char* FORM_SERVICE = "service";
 
     private:
         /**
@@ -50,17 +52,13 @@ namespace CloudAppClient {
 
         MediaBean media;
 
-        //TODO display and confirm
+        ConfirmBean confirm;
+
+        PickupBean pickup;
 
     public:
 
         ActionBean() {}
-
-        ActionBean(const string &version, const string &type, bool shouldEndSession, const string &form,
-                   const VoiceBean &voice, const MediaBean &media) : version(version), type(type),
-                                                                     shouldEndSession(shouldEndSession), form(form),
-                                                                     voice(voice), media(media) {}
-
 
         virtual ~ActionBean() {
 
@@ -72,7 +70,9 @@ namespace CloudAppClient {
                    shouldEndSession == rhs.shouldEndSession &&
                    form == rhs.form &&
                    voice == rhs.voice &&
-                   media == rhs.media;
+                   media == rhs.media &&
+                   confirm == rhs.confirm &&
+                   pickup == rhs.pickup;
         }
 
         bool operator!=(const ActionBean &rhs) const {
@@ -86,6 +86,8 @@ namespace CloudAppClient {
             form = rhs.form;
             voice = rhs.voice;
             media = rhs.media;
+            confirm = rhs.confirm;
+            pickup = rhs.pickup;
             return *this;
         }
 
@@ -136,6 +138,24 @@ namespace CloudAppClient {
         void setMedia(const MediaBean &media) {
             ActionBean::media = media;
         }
+
+        const ConfirmBean &getConfirm() const {
+            return confirm;
+        }
+
+        void setConfirm(const ConfirmBean &confirm) {
+            ActionBean::confirm = confirm;
+        }
+
+        const PickupBean &getPickup() const {
+            return pickup;
+        }
+
+        void setPickup(const PickupBean &pickup) {
+            ActionBean::pickup = pickup;
+        }
+
+
 
     };
 }

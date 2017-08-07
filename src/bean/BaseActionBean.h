@@ -8,23 +8,22 @@
 
 using std::string;
 
-namespace CloudAppClient{
+namespace CloudAppClient {
     class BaseActionBean {
 
     public:
-          const string ACTION_PLAY = "PLAY";
-          const string ACTION_PAUSE = "PAUSE";
-          const string ACTION_RESUME = "RESUME";
-          const string ACTION_STOP = "STOP";
-          const string ACTION_FORWARD = "FORWARD";
-          const string ACTION_BACKWARD = "BACKWARD";
+        static constexpr const char *ACTION_PLAY = "PLAY";
+        static constexpr const char *ACTION_PAUSE = "PAUSE";
+        static constexpr const char *ACTION_RESUME = "RESUME";
+        static constexpr const char *ACTION_STOP = "STOP";
+        static constexpr const char *ACTION_FORWARD = "FORWARD";
+        static constexpr const char *ACTION_BACKWARD = "BACKWARD";
 
         string action;
 
         BaseActionBean() {}
 
-        BaseActionBean(const string &action) : action(action)  {
-
+        BaseActionBean(const string &action) : action(action) {
         }
 
         virtual ~BaseActionBean() {
@@ -38,6 +37,11 @@ namespace CloudAppClient{
             return !(rhs == *this);
         }
 
+        BaseActionBean &operator=(const BaseActionBean &rhs) {
+            action = rhs.action;
+            return *this;
+        }
+
         void setAction(const string &action) {
             BaseActionBean::action = action;
         }
@@ -48,7 +52,7 @@ namespace CloudAppClient{
 
         bool isValid() {
             if (action.empty()) {
-                rokid::log::Log::d("Action","action is null !");
+                rokid::log::Log::d("Action", "action is null !");
                 return false;
             }
             //action 为其他操作不需要判断url/tts

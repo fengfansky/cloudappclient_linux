@@ -6,6 +6,8 @@
 #include "NLPBean.h"
 #include "VoiceBean.h"
 #include "MediaBean.h"
+#include "ConfirmBean.h"
+#include "PickupBean.h"
 
 using std::string;
 
@@ -22,10 +24,49 @@ namespace CloudAppClient {
         bool shouldEndSession;
         VoiceBean voice;
         MediaBean media;
-        //TODO confirm
-//        ConfirmBean confirmBean;
+        ConfirmBean confirm;
+        PickupBean pickup;
 
     public:
+        ActionNode() {}
+
+        virtual ~ActionNode() {
+
+        }
+
+        bool operator==(const ActionNode &rhs) const {
+            return asr == rhs.asr &&
+                   nlp == rhs.nlp &&
+                   respId == rhs.respId &&
+                   resType == rhs.resType &&
+                   appId == rhs.appId &&
+                   form == rhs.form &&
+                   actionType == rhs.actionType &&
+                   shouldEndSession == rhs.shouldEndSession &&
+                   voice == rhs.voice &&
+                   media == rhs.media &&
+                   confirm == rhs.confirm &&
+                   pickup == rhs.pickup;
+        }
+
+        bool operator!=(const ActionNode &rhs) const {
+            return !(rhs == *this);
+        }
+
+        ActionNode& operator=(const ActionNode &rhs){
+            asr = rhs.asr;
+            nlp = rhs.nlp;
+            respId = rhs.respId;
+            resType = rhs.resType;
+            appId = rhs.appId;
+            form = rhs.form;
+            actionType = rhs.actionType;
+            shouldEndSession = rhs.shouldEndSession;
+            voice = rhs.voice;
+            media = rhs.media;
+            confirm = rhs.confirm;
+        }
+
         const string &getAsr() const {
             return asr;
         }
@@ -96,6 +137,30 @@ namespace CloudAppClient {
 
         void setMedia(const MediaBean &media) {
             ActionNode::media = media;
+        }
+
+        void setAsr(const string &asr) {
+            ActionNode::asr = asr;
+        }
+
+        void setNlp(const NLPBean &nlp) {
+            ActionNode::nlp = nlp;
+        }
+
+        const ConfirmBean &getConfirm() const {
+            return confirm;
+        }
+
+        void setConfirm(const ConfirmBean &confirm) {
+            ActionNode::confirm = confirm;
+        }
+
+        const PickupBean &getPickup() const {
+            return pickup;
+        }
+
+        void setPickup(const PickupBean &pickup) {
+            ActionNode::pickup = pickup;
         }
     };
 }

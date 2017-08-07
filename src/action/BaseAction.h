@@ -21,8 +21,6 @@ namespace CloudAppClient {
             VOICE
         };
 
-        void BaseAction();
-
         virtual ~BaseAction();
 
         virtual void processAction(const T &actionBean) {
@@ -39,17 +37,17 @@ namespace CloudAppClient {
                 return;
             }
 
-            if (strcmp(action, BaseActionBean::ACTION_PLAY) == 0) {
+            if (action.compare(BaseActionBean::ACTION_PLAY) == 0) {
                 userStartPlay(actionBean);
-            } else if (strcmp(action, BaseActionBean::ACTION_PAUSE)) {
+            } else if (action.compare(BaseActionBean::ACTION_PAUSE) == 0) {
                 userPausedPlay();
-            } else if (strcmp(action, BaseActionBean::ACTION_RESUME)) {
+            } else if (action.compare(BaseActionBean::ACTION_RESUME) == 0) {
                 userResumePlay();
-            } else if (strcmp(action, BaseActionBean::ACTION_STOP)) {
+            } else if (action.compare(BaseActionBean::ACTION_STOP) == 0) {
                 userStopPlay();
-            } else if (strcmp(action, BaseActionBean::ACTION_FORWARD)) {
+            } else if (action.compare(BaseActionBean::ACTION_FORWARD) == 0) {
                 forward();
-            } else if (strcmp(action, BaseActionBean::ACTION_BACKWARD)) {
+            } else if (action.compare(BaseActionBean::ACTION_BACKWARD) == 0) {
                 backward();
             } else {
                 rokid::log::Log::d(TAG, (" invalidate action ! " + action).c_str());

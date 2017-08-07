@@ -8,10 +8,10 @@ set(SOURCE_FILES
         src/action/BaseAction.h
         src/action/MediaAction.h
         src/action/VoiceAction.h
+        src/bean/ActionNode.h
         src/bean/ActionBean.h
         src/bean/BaseActionBean.h
         src/bean/CloudActionResponseBean.h
-        src/bean/CommonResponseBean.h
         src/bean/MediaBean.h
         src/bean/NLPBean.h
         src/bean/ResponseBean.h
@@ -36,7 +36,7 @@ set(SOURCE_FILES
         src/util/LinkedHashMap.h
         src/util/rlog.h
         src/util/log.cc
-        )
+        src/bean/ConfirmBean.h src/bean/PickupBean.h)
 
 #set ( CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} ~/cpp-netlib-build )
 #find_package ( cppnetlib 0.11.0 REQUIRED )

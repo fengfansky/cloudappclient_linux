@@ -30,8 +30,6 @@ namespace CloudAppClient {
             return !(rhs == *this);
         }
 
-    public:
-
         VoiceItemBean &operator=(const VoiceItemBean &rhs) {
             tts = rhs.tts;
             return *this;

@@ -158,7 +158,7 @@ namespace CloudAppClient {
             rokid::log::Log::d(TAG,
                                ("form: " + get_app_type() + "new_event_action_node actioNode : " + " media_state: " +
                                media_state + " voice_state " + voice_state).c_str());
-            if (actionNode != nullptr) {
+            if (&actionNode != nullptr) {
 
                 if (actionNode.getAppId().empty()) {
                     rokid::log::Log::d(TAG, "new cloudAppId is null !");
@@ -314,7 +314,7 @@ namespace CloudAppClient {
             rokid::log::Log::d(TAG,
                                ("form: " + get_app_type() + " voice_cancled ! " + " media_state: " + media_state +
                                " voice_state " +
-                               voice_state).c_str();
+                               voice_state).c_str());
             checkAppState();
             mutex_lock.unlock();
         }
@@ -348,7 +348,7 @@ namespace CloudAppClient {
 
             if (strcmp(ActionBean::TYPE_NORMAL, actionNode.getActionType())) {
 
-                if (actionNode.getVoice() != nullptr) {
+                if (&actionNode.getVoice() != nullptr) {
                     VoiceAction::getInstance()->processAction(actionNode.getVoice());
                     //TODO 开启拾音
                     /*if (actionNode.getConfirmBean() != nullptr && task_process_callback != nullptr &&
@@ -356,7 +356,7 @@ namespace CloudAppClient {
                         task_process_callback.get().openSiren();
                     }*/
                 }
-                if (actionNode.getMedia() != nullptr) {
+                if (&actionNode.getMedia() != nullptr) {
                     MediaAction::getInstance()->processAction(actionNode.getMedia());
                 }
             }

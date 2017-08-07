@@ -8,7 +8,7 @@
 
 namespace CloudAppClient {
 
-    const static char* TAG = "action_parser";
+    const static char* TAG = "nlp_parser";
 
     bool nlp_parser::string_to_nlp(const std::string &nlp_string, NLPBean &nlp_bean) {
 

@@ -1,5 +1,4 @@
 #include "json/json.h"
-#include "util/rlog.h"
 #include "bean/NLPBean.h"
 #include "parser/nlp_parser.h"
 #include "parser/action_parser.h"
@@ -23,7 +22,8 @@ int main(void) {
             "   }\n"
             "}";
 
-    const std::string &action_str = "  \"action\":  \n"
+    const std::string &action_str = "{"
+            "  \"action\": { \n"
             "      \"appId\":\"R70897F43CBC4BF2A735166AED3FEE64\",\n"
             "      \"response\":{  \n"
             "         \"action\":{  \n"
