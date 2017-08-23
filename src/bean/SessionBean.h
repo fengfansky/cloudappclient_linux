@@ -1,94 +1,64 @@
 //
 // Created by Fan Feng on 2017/7/29.
 //
+#ifndef CLOUDAPPCLIENT_SESSIONBEAN_H
+#define CLOUDAPPCLIENT_SESSIONBEAN_H
 
 #include <string>
 #include <map>
 
-using std::string;
-using map_string = std::map<string, string>;
-namespace CloudAppClient {
 
-    class SessionBean {
+using namespace std;
 
-    private:
-        string sessionId;
-        /**
-         * indicates whether it is a new session
-         */
+namespace CloudAppClient{
 
-        bool newSession = false;
+class SessionBean {
 
-        string applicationId;
+private:
+    string sessionId;
+    /**
+     * indicates whether it is a new session
+     */
 
-        /**
-         * session attributes set by CloudApp in Response
-         */
-        map_string attributes;
+    bool newSession = false;
 
-    public:
+    string applicationId;
 
-        SessionBean() : newSession(false) {
+    /**
+     * session attributes set by CloudApp in Response
+     */
+    string attributes;
 
-        }
+public:
 
-        SessionBean(const string &sessionId, bool newSession, const string &applicationId, const map_string &attributes)
-                : sessionId(sessionId), newSession(newSession), applicationId(applicationId), attributes(attributes) {}
+    SessionBean();
 
-        virtual ~SessionBean() {
+    SessionBean(const string &sessionId, bool newSession, const string &applicationId, const string &attributes);
+    virtual ~SessionBean();
 
-        }
+    bool operator==(const SessionBean &rhs) const;
 
-        bool operator==(const SessionBean &rhs) const {
-            return sessionId == rhs.sessionId &&
-                   newSession == rhs.newSession &&
-                   applicationId == rhs.applicationId &&
-                   attributes == rhs.attributes;
-        }
+    bool operator!=(const SessionBean &rhs) const;
 
-        bool operator!=(const SessionBean &rhs) const {
-            return !(rhs == *this);
-        }
+    SessionBean& operator=(const SessionBean &rhs);
 
-        SessionBean& operator=(const SessionBean &rhs){
-            sessionId = rhs.sessionId;
-            newSession = rhs.newSession;
-            applicationId = rhs.applicationId;
-            attributes = rhs.attributes;
-            return *this;
-        }
+    const string &getSessionId() const;
 
-        const string &getSessionId() const {
-            return sessionId;
-        }
+    void setSessionId(const string &sessionId);
 
-        void setSessionId(const string &sessionId) {
-            SessionBean::sessionId = sessionId;
-        }
+    bool isNewSession() const;
 
-        bool isNewSession() const {
-            return newSession;
-        }
+    void setNewSession(bool newSession);
 
-        void setNewSession(bool newSession) {
-            SessionBean::newSession = newSession;
-        }
+    const string &getApplicationId() const;
 
-        const string &getApplicationId() const {
-            return applicationId;
-        }
+    void setApplicationId(const string &applicationId);
 
-        void setApplicationId(const string &applicationId) {
-            SessionBean::applicationId = applicationId;
-        }
+    const string &getAttributes() const;
 
-        const map_string &getAttributes() const {
-            return attributes;
-        }
-
-        void setAttributes(const map_string &attributes) {
-            SessionBean::attributes = attributes;
-        }
-    };
+    void setAttributes(const string &attributes);
+};
 
 }
+
+#endif

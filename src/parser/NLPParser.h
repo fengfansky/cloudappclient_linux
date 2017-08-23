@@ -1,23 +1,29 @@
 //
 // Created by Fan Feng on 2017/7/28.
 //
-#pragma once
+#ifndef CLOUDAPPCLIENT_NLPPARSER_H
+#define CLOUDAPPCLIENT_NLPPARSER_H
 
 #include <string>
 #include "../bean/NLPBean.h"
 
+using namespace CloudAppClient;
+
 namespace CloudAppClient {
 
-    class nlp_parser {
+    class NLPParser {
 
     public:
 
-        nlp_parser() {}
+        NLPParser() {}
 
-        virtual ~nlp_parser() {}
+        ~NLPParser() {}
+
+        const static char* TAG;
 
         static bool string_to_nlp(const std::string &nlp_string, NLPBean &nlp_bean);
 
     };
 
 }
+#endif

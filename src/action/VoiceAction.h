@@ -1,77 +1,39 @@
 //
 // Created by Fan Feng on 2017/7/16.
 //
-#pragma once
+#ifndef CLOUDAPPCLIENT_VOICEACTION_H
+#define CLOUDAPPCLIENT_VOICEACTION_H
 
 #include <cstdlib>
 #include "BaseAction.h"
 
 namespace CloudAppClient {
-    template<class T>
-    class VoiceAction : public BaseAction {
 
-        static VoiceAction *instance = nullptr;
+template<class T>
+class VoiceAction : public BaseAction<T> {
+private:
+    static VoiceAction *instance = nullptr;
+    VoiceAction();
+    virtual ~VoiceAction();
 
-        VoiceAction::VoiceAction() {
+public:
+    static VoiceAction *getInstance();
 
-        }
+public:
+    virtual void processAction(const T &actionBean);
+    virtual void userStartPlay(const T &actionBean);
+    virtual void userPausedPlay();
+    virtual void userStopPlay();
+    virtual void userResumePlay();
+    virtual void pausePlay();
+    virtual void stopPlay();
+    virtual void resumePlay();
+    virtual void forward();
+    virtual void backward();
+    virtual const Int32 getActionType();
 
-        VoiceAction::~VoiceAction() {
-            delete instance;
-        }
+};
 
-    public:
-        static VoiceAction *getInstance() {
-            if (instance == nullptr) {
-                instance = new VoiceAction();
-            }
-
-            return instance;
-        }
-
-        void processAction(const T &actionBean) override {
-            BaseAction::processAction(actionBean);
-        }
-
-        void userStartPlay(const T &actionBean) override {
-
-        }
-
-        void userPausedPlay() override {
-
-        }
-
-        void userStopPlay() override {
-
-        }
-
-        void userResumePlay() override {
-
-        }
-
-        void pausePlay() override {
-
-        }
-
-        void stopPlay() override {
-
-        }
-
-        void resumePlay() override {
-
-        }
-
-        void forward() override {
-
-        }
-
-        void backward() override {
-
-        }
-
-        const ACTION_TYPE &getActionType() override {
-            return ACTION_TYPE ::VOICE;
-        }
-
-    };
 }
+
+#endif

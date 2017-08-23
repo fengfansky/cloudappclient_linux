@@ -1,221 +1,141 @@
 //
 // Created by Fan Feng on 2017/7/13->
 //
-#pragma once
+#ifndef CLOUDAPPCLIENT_NLPBEAN_H
+#define CLOUDAPPCLIENT_NLPBEAN_H
 
 #include <iostream>
+#include <string>
 #include <map>
 
-using std::string;
-using map_string = std::map<string, string>;
+using namespace std;
 
-namespace CloudAppClient {
-    class NLPBean {
-    private:
-        /**
-        * asr content
-         */
-        string asr;
-        /**
-         * intent cloudAppId
-         */
-        string appId;
-        /**
-         * intent
-         */
-        string intent;
-        /**
-         * indicate whether the action should execute: YES or NO
-         */
-        string confirm;
-        /**
-         * parameters for the intent key value string pairs
-         */
-        map_string slots;
-        /**
-        * nlp parse start position
-        */
-        int posStart = 0;
-        /**
-         * nlp parse end position
-         */
-        int posEnd = 0;
-        /**
-         * parse confidence 1.0f is the max value
-         */
-        float confidence = 0.0f;
+namespace CloudAppClient{
 
-        /**
-         * the pattern that the sentence matched
-         */
-        string pattern;
-        /**
-         * the version of the hit xml
-         */
-        string version;
+class NLPBean {
+private:
+    /**
+    * asr content
+     */
+    string asr;
+    /**
+     * intent cloudAppId
+     */
+    string appId;
+    /**
+     * intent
+     */
+    string mIntent;
+    /**
+     * indicate whether the action should execute: YES or NO
+     */
+    string confirm;
+    /**
+     * parameters for the intent key value string pairs
+     */
+    string slots;
+    /**
+    * nlp parse start position
+    */
+    int posStart = 0;
+    /**
+     * nlp parse end position
+     */
+    int posEnd = 0;
+    /**
+     * parse confidence 1.0f is the max value
+     */
+    float confidence = 0.0f;
 
-        /**
-         * the original asr
-         */
-        string voice;
+    /**
+     * the pattern that the sentence matched
+     */
+    string pattern;
+    /**
+     * the version of the hit xml
+     */
+    string version;
 
-        /**
-         * forward content
-         */
-        string forwardContent;
+    /**
+     * the original asr
+     */
+    string mVoice;
 
-        /**
-        * indicates the nlp is a cloud call
-        */
-        bool cloud = true;
+    /**
+     * forward content
+     */
+    string forwardContent;
 
-    public:
-        NLPBean() {}
+    /**
+    * indicates the nlp is a cloud call
+    */
+    bool cloud = true;
 
-        virtual ~NLPBean() {
+public:
+    NLPBean();
 
-        }
+    NLPBean(const string &asr, const string &appId, const string &intent, const string &confirm,
+            const string &slots, int posStart, int posEnd, float confidence, const string &pattern,
+            const string &version, const string &voice, const string &forwardContent, bool cloud);
 
-        bool operator==(const NLPBean &rhs) const {
-            return asr == rhs.asr &&
-                   appId == rhs.appId &&
-                   intent == rhs.intent &&
-                   confirm == rhs.confirm &&
-                   slots == rhs.slots &&
-                   posStart == rhs.posStart &&
-                   posEnd == rhs.posEnd &&
-                   confidence == rhs.confidence &&
-                   pattern == rhs.pattern &&
-                   version == rhs.version &&
-                   voice == rhs.voice &&
-                   forwardContent == rhs.forwardContent &&
-                   cloud == rhs.cloud;
-        }
+    virtual ~NLPBean();
 
-        bool operator!=(const NLPBean &rhs) const {
-            return !(rhs == *this);
-        }
+    bool operator==(const NLPBean &rhs) const;
 
-        NLPBean& operator=(const NLPBean &rhs){
-            asr = rhs.asr;
-            appId = rhs.appId;
-            intent = rhs.intent;
-            confirm = rhs.confirm;
-            slots = rhs.slots;
-            posStart = rhs.posStart;
-            posEnd = rhs.posEnd;
-            confidence = rhs.confidence;
-            pattern = rhs.pattern;
-            version = rhs.version;
-            voice = rhs.voice;
-            forwardContent = rhs.forwardContent;
-            cloud = rhs.cloud;
-            return  *this;
-        }
+    bool operator!=(const NLPBean &rhs) const;
 
-        const string &getAsr() const {
-            return asr;
-        }
+    NLPBean& operator=(const NLPBean &rhs);
 
-        void setAsr(const string &asr) {
-            NLPBean::asr = asr;
-        }
+    const string &getAsr() const;
 
-        const string &getAppId() const {
-            return appId;
-        }
+    void setAsr(const string &asr);
 
-        void setAppId(const string &appId) {
-            NLPBean::appId = appId;
-        }
+    const string &getAppId() const;
+    void setAppId(const string &appId);
 
-        const string &getIntent() const {
-            return intent;
-        }
+    const string &getIntent() const;
 
-        void setIntent(const string &intent) {
-            NLPBean::intent = intent;
-        }
+    void setIntent(const string &intent);
 
-        const string &getConfirm() const {
-            return confirm;
-        }
+    const string &getConfirm() const;
 
-        void setConfirm(const string &confirm) {
-            NLPBean::confirm = confirm;
-        }
+    void setConfirm(const string &confirm);
 
-        const map_string &getSlots() const {
-            return slots;
-        }
+    const string &getSlots() const;
 
-        void setSlots(const map_string &slots) {
-            NLPBean::slots = slots;
-        }
+    void setSlots(const string &slots);
 
-        int getPosStart() const {
-            return posStart;
-        }
+    int getPosStart() const;
 
-        void setPosStart(int posStart) {
-            NLPBean::posStart = posStart;
-        }
+    void setPosStart(int posStart);
 
-        int getPosEnd() const {
-            return posEnd;
-        }
+    int getPosEnd() const;
 
-        void setPosEnd(int posEnd) {
-            NLPBean::posEnd = posEnd;
-        }
+    void setPosEnd(int posEnd);
 
-        float getConfidence() const {
-            return confidence;
-        }
+    float getConfidence() const;
 
-        void setConfidence(float confidence) {
-            NLPBean::confidence = confidence;
-        }
+    void setConfidence(float confidence);
 
-        const string &getPattern() const {
-            return pattern;
-        }
+    const string &getPattern() const;
 
-        void setPattern(const string &pattern) {
-            NLPBean::pattern = pattern;
-        }
+    void setPattern(const string &pattern);
+    const string &getVersion() const;
 
-        const string &getVersion() const {
-            return version;
-        }
+    void setVersion(const string &version);
 
-        void setVersion(const string &version) {
-            NLPBean::version = version;
-        }
+    const string &getVoice() const;
+    void setVoice(const string &voice);
 
-        const string &getVoice() const {
-            return voice;
-        }
+    const string &getForwardContent() const;
 
-        void setVoice(const string &voice) {
-            NLPBean::voice = voice;
-        }
+    void setForwardContent(const string &forwardContent);
 
-        const string &getForwardContent() const {
-            return forwardContent;
-        }
+    bool isCloud() const;
 
-        void setForwardContent(const string &forwardContent) {
-            NLPBean::forwardContent = forwardContent;
-        }
+    void setCloud(bool cloud);
 
-        bool isCloud() const {
-            return cloud;
-        }
-
-        void setCloud(bool cloud) {
-            NLPBean::cloud = cloud;
-        }
-
-    };
+};
 }
+
+#endif

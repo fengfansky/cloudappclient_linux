@@ -1,6 +1,8 @@
 //
 // Created by Fan Feng on 2017/7/16.
 //
+#ifndef CLOUDAPPCLIENT_ACTIONNODE_H
+#define CLOUDAPPCLIENT_ACTIONNODE_H
 
 #include <string>
 #include "NLPBean.h"
@@ -9,158 +11,64 @@
 #include "ConfirmBean.h"
 #include "PickupBean.h"
 
-using std::string;
+using namespace std;
 
 namespace CloudAppClient {
-    class ActionNode {
-    private:
-        string asr;
-        NLPBean nlp;
-        string respId;
-        string resType;
-        string appId;
-        string form;
-        string actionType;
-        bool shouldEndSession;
-        VoiceBean voice;
-        MediaBean media;
-        ConfirmBean confirm;
-        PickupBean pickup;
 
-    public:
-        ActionNode() {}
+class ActionNode {
+private:
+    string asr;
+    NLPBean nlp;
+    string respId;
+    string resType;
+    string appId;
+    string form;
+    string actionType;
+    bool shouldEndSession;
+    VoiceBean voice;
+    MediaBean media;
+    ConfirmBean confirm;
+    PickupBean pickup;
 
-        virtual ~ActionNode() {
+public:
+    ActionNode();
+    virtual ~ActionNode();
+    bool operator==(const ActionNode &rhs) const;
+    bool operator!=(const ActionNode &rhs) const;
+    ActionNode& operator=(const ActionNode &rhs);
+    void setAsr(const string &asr);
+    void setNlp(const NLPBean &nlp);
+    const ConfirmBean &getConfirm() const;
+    void setConfirm(const ConfirmBean &confirm);
+    const PickupBean &getPickup() const;
+    void setPickup(const PickupBean &pickup);
+    const string &getAsr() const ;
+    const NLPBean &getNlp() const;
+    const string &getRespId() const;
 
-        }
+    void setRespId(const string &respId);
+    const string &getResType() const;
+    void setResType(const string &resType);
+    const string &getAppId() const;
+    void setAppId(const string &appId);
+    const string &getForm() const;
+    void setForm(const string &form);
+    const string & getActionType()const;
+    void setActionType(const string &actionType);
 
-        bool operator==(const ActionNode &rhs) const {
-            return asr == rhs.asr &&
-                   nlp == rhs.nlp &&
-                   respId == rhs.respId &&
-                   resType == rhs.resType &&
-                   appId == rhs.appId &&
-                   form == rhs.form &&
-                   actionType == rhs.actionType &&
-                   shouldEndSession == rhs.shouldEndSession &&
-                   voice == rhs.voice &&
-                   media == rhs.media &&
-                   confirm == rhs.confirm &&
-                   pickup == rhs.pickup;
-        }
+    bool isShouldEndSession() const;
 
-        bool operator!=(const ActionNode &rhs) const {
-            return !(rhs == *this);
-        }
+    void setShouldEndSession(bool shouldEndSession);
 
-        ActionNode& operator=(const ActionNode &rhs){
-            asr = rhs.asr;
-            nlp = rhs.nlp;
-            respId = rhs.respId;
-            resType = rhs.resType;
-            appId = rhs.appId;
-            form = rhs.form;
-            actionType = rhs.actionType;
-            shouldEndSession = rhs.shouldEndSession;
-            voice = rhs.voice;
-            media = rhs.media;
-            confirm = rhs.confirm;
-        }
+    const VoiceBean &getVoice() const;
 
-        const string &getAsr() const {
-            return asr;
-        }
+    void setVoice(const VoiceBean &voice);
 
-        const NLPBean &getNlp() const {
-            return nlp;
-        }
+    const MediaBean &getMedia() const;
 
-        const string &getRespId() const {
-            return respId;
-        }
+    void setMedia(const MediaBean &media);
+};
 
-        void setRespId(const string &respId) {
-            ActionNode::respId = respId;
-        }
-
-        const string &getResType() const {
-            return resType;
-        }
-
-        void setResType(const string &resType) {
-            ActionNode::resType = resType;
-        }
-
-        const string &getAppId() const {
-            return appId;
-        }
-
-        void setAppId(const string &appId) {
-            ActionNode::appId = appId;
-        }
-
-        const string &getForm() const {
-            return form;
-        }
-
-        void setForm(const string &form) {
-            ActionNode::form = form;
-        }
-
-        const string &getActionType() const {
-            return actionType;
-        }
-
-        void setActionType(const string &actionType) {
-            ActionNode::actionType = actionType;
-        }
-
-        bool isShouldEndSession() const {
-            return shouldEndSession;
-        }
-
-        void setShouldEndSession(bool shouldEndSession) {
-            ActionNode::shouldEndSession = shouldEndSession;
-        }
-
-        const VoiceBean &getVoice() const {
-            return voice;
-        }
-
-        void setVoice(const VoiceBean &voice) {
-            ActionNode::voice = voice;
-        }
-
-        const MediaBean &getMedia() const {
-            return media;
-        }
-
-        void setMedia(const MediaBean &media) {
-            ActionNode::media = media;
-        }
-
-        void setAsr(const string &asr) {
-            ActionNode::asr = asr;
-        }
-
-        void setNlp(const NLPBean &nlp) {
-            ActionNode::nlp = nlp;
-        }
-
-        const ConfirmBean &getConfirm() const {
-            return confirm;
-        }
-
-        void setConfirm(const ConfirmBean &confirm) {
-            ActionNode::confirm = confirm;
-        }
-
-        const PickupBean &getPickup() const {
-            return pickup;
-        }
-
-        void setPickup(const PickupBean &pickup) {
-            ActionNode::pickup = pickup;
-        }
-    };
 }
+
+#endif

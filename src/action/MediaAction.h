@@ -1,76 +1,42 @@
 //
 // Created by Fan Feng on 2017/7/14.
 //
-#pragma once
+#ifndef CLOUDAPPCLIENT_MEDIAACTION_H
+#define CLOUDAPPCLIENT_MEDIAACTION_H
 
 #include <cstdlib>
 #include "BaseAction.h"
 
 namespace CloudAppClient {
-    template<class T>
-    class MediaAction : public BaseAction {
 
-    private:
-        static MediaAction *instance = nullptr;
+template<class T>
+class MediaAction : public BaseAction<T> {
 
-        MediaAction::MediaAction() {
-            //TODO init RKAudioPlayer
-        }
+private:
+    static MediaAction *instance = nullptr;
 
-        MediaAction::~MediaAction() {
-            delete instance;
-        }
+    MediaAction();
+    virtual ~MediaAction();
 
-    public:
-        static MediaAction *getInstance() {
-            if (instance == nullptr) {
-                instance = new MediaAction();
-            }
+public:
+    static MediaAction* getInstance();
 
-            return instance;
-        }
+public:
 
-    public:
+    virtual void userStartPlay(const T &actionBean);
+    virtual void userPausedPlay();
+    virtual void userStopPlay();
+    virtual void userResumePlay();
+    virtual void pausePlay();
+    virtual  void stopPlay();
+    virtual void resumePlay();
+    virtual void forward();
+    virtual void backward();
+    virtual const Int32 getActionType();
 
-        void userStartPlay(const T &actionBean) override {
+};
 
-        }
-
-        void userPausedPlay() override {
-
-        }
-
-        void userStopPlay() override {
-
-        }
-
-        void userResumePlay() override {
-
-        }
-
-        void pausePlay() override {
-
-        }
-
-        void stopPlay() override {
-
-        }
-
-        void resumePlay() override {
-
-        }
-
-        void forward() override {
-
-        }
-
-        void backward() override {
-
-        }
-
-        const ACTION_TYPE &getActionType() override {
-            return ACTION_TYPE ::MEDIA;
-        }
-
-    };
 }
+
+#endif
+

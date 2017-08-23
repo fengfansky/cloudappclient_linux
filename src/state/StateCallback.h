@@ -1,7 +1,8 @@
 //
 // Created by Fan Feng on 2017/7/16.
 //
-#pragma once
+#ifndef CLOUDAPPCLIENT_BASEURLCONFIG_H
+#define CLOUDAPPCLIENT_BASEURLCONFIG_H
 
 #include "../bean/ActionNode.h"
 
@@ -21,11 +22,7 @@ namespace CloudAppClient {
 
         virtual string get_app_type() = 0;
 
-    };
 
-    class MediaStateCallBack {
-
-    public:
         virtual void media_started() = 0;
 
         virtual void media_paused(const int position) = 0;
@@ -35,10 +32,8 @@ namespace CloudAppClient {
         virtual void media_stopped() = 0;
 
         virtual void media_error(const int errorCode) = 0;
-    };
 
-    class VoiceStateCallBack {
-    public:
+
         virtual void voice_started() = 0;
 
         virtual void voice_paused() = 0;
@@ -48,5 +43,8 @@ namespace CloudAppClient {
         virtual void voice_cancled() = 0;
 
         virtual void voice_error() = 0;
+
     };
+
 }
+#endif

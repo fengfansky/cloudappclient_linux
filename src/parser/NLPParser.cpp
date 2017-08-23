@@ -2,15 +2,17 @@
 // Created by Fan Feng on 2017/7/28.
 //
 
-#include "nlp_parser.h"
+#include "NLPParser.h"
 #include "../util/rlog.h"
 #include "../json/json.h"
+
+using namespace CloudAppClient;
 
 namespace CloudAppClient {
 
     const static char* TAG = "nlp_parser";
 
-    bool nlp_parser::string_to_nlp(const std::string &nlp_string, NLPBean &nlp_bean) {
+    bool string_to_nlp(const std::string &nlp_string, NLPBean &nlp_bean) {
 
         rokid::log::Log::d(TAG, "parse nlp ");
 
@@ -125,9 +127,9 @@ namespace CloudAppClient {
         }
 
         auto slots = nlp["slots"];
-        if (slots != nullptr) {
-            nlp_bean.setSlots(slots.get<std::map<string, string>>());
-        }
+//        if (slots != nullptr) {
+//            nlp_bean.setSlots(slots.get<std::map<string, string>>());
+//        }
 
         return true;
     }

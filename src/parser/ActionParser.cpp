@@ -2,14 +2,17 @@
 // Created by Fan Feng on 2017/7/28.
 //
 
-#include "action_parser.h"
+#include "ActionParser.h"
 #include "../json/json.h"
+#include "../util/rlog.h"
+
+using namespace CloudAppClient;
 
 namespace CloudAppClient {
 
     const char* TAG = "action_parser";
 
-    bool action_parser::string_to_action(const std::string &action_str, CloudActionResponseBean &action_bean) {
+    bool ActionParser::strToAction(const std::string &action_str, CloudActionResponseBean &action_bean) {
 
         rokid::log::Log::d(TAG, " parse action ");
 
@@ -138,7 +141,7 @@ namespace CloudAppClient {
                 auto url = media_item["url"];
 
                 if (url != nullptr && !url.get<string>().empty()) {
-                    media_item_bean.setUrl(url.get<string>());
+                    media_item_bean.setURL(url.get<string>());
                     rokid::log::Log::d(TAG, ("media item url : " + url.get<string>()).c_str());
                 } else {
                     rokid::log::Log::d(TAG, "media item type : null !");
@@ -238,9 +241,9 @@ namespace CloudAppClient {
 
         auto attributes = action["attributes"];
 
-        if (attributes != nullptr && !attributes.get<std::map<string, string>>().empty()) {
-            session_bean.setAttributes(newSession.get<std::map<string, string>>());
-        }
+//        if (attributes != nullptr && !attributes.get<std::map<string, string>>().empty()) {
+//            session_bean.setAttributes(newSession.get<std::map<string, string>>());
+//        }
 
         action_bean.setSession(session_bean);
 

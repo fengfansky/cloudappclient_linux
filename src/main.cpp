@@ -1,10 +1,15 @@
 #include "json/json.h"
 #include "bean/NLPBean.h"
-#include "parser/nlp_parser.h"
-#include "parser/action_parser.h"
+#include "parser/NLPParser.h"
+#include "parser/ActionParser.h"
+#include "proto/SendEvent.pb.h"
+#include "http/HttpClientWrapper.h"
+#include "http/BaseUrlConfig.h"
 
 using std::string;
-using json = nlohmann::json;
+using namespace nlohmann;
+using namespace proto;
+using namespace CloudAppClient;
 
 int main(void) {
 
@@ -54,18 +59,32 @@ int main(void) {
             "   }\n"
             "}";
 
-    CloudAppClient::NLPBean nlpBean;
-    CloudAppClient::CloudActionResponseBean cloudActionResponseBean;
+//    NLPBean nlpBean;
+//    CloudActionResponseBean cloudActionResponseBean;
+
+//    NLPParser::string_to_nlp(nlp_str, nlpBean);
+//
+//    ActionParser::strToAction(action_str, cloudActionResponseBean);
+
+//    2. test network
+
+    SendEventRequest sendEventRequest;
+    sendEventRequest.set_appid("R233A4F187F34C94B93EE3BAECFCE2E3");
+    sendEventRequest.set_event("Media.FINISHED");
+
+    string eventRequestStr = sendEventRequest.SerializeAsString();
+
+    BaseUrlConfig baseUrlConfig;
+
+    HttpClientWrapper::getInstance()->sendRequest(baseUrlConfig.getUrl(), eventRequestStr);
 
 
-    CloudAppClient::nlp_parser::string_to_nlp(nlp_str, nlpBean);
+    //3. test time
 
-    CloudAppClient::action_parser::string_to_action(action_str, cloudActionResponseBean);
-
-
-//    rokid::log::Log::d("test_json", nlp_str.c_str());
-    //2. test network
-
+//    time_t now = time(NULL);
+//
+//
+//    cout << "时间戳： " << now * 1000 << endl;
 
     return 0;
 }

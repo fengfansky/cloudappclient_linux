@@ -1,95 +1,55 @@
 //
 // Created by Fan Feng on 2017/7/17.
 //
-#pragma once
+#ifndef CLOUDAPPCLIENT_VOICEBEAN_H
+#define CLOUDAPPCLIENT_VOICEBEAN_H
 
 #include "BaseActionBean.h"
 
-namespace CloudAppClient {
+using namespace std;
 
-    class VoiceItemBean {
+namespace CloudAppClient{
 
-    private:
-        string tts;
+class VoiceItemBean {
 
-    public:
+private:
+    string tts;
 
-        VoiceItemBean() {}
+public:
 
-        VoiceItemBean(const string &tts) : tts(tts) {}
+    VoiceItemBean();
+    VoiceItemBean(const string &tts);
+    virtual ~VoiceItemBean();
+    bool operator==(const VoiceItemBean &rhs) const;
+    bool operator!=(const VoiceItemBean &rhs) const;
+public:
+    VoiceItemBean &operator=(const VoiceItemBean &rhs);
+    const string &getTts() const;
+    void setTts(const string &tts);
+};
 
-        virtual ~VoiceItemBean() {
+class VoiceBean : public BaseActionBean {
 
-        }
+private:
+    VoiceItemBean voiceItemBean;
 
-        bool operator==(const VoiceItemBean &rhs) const {
-            return tts == rhs.tts;
-        }
+public:
 
-        bool operator!=(const VoiceItemBean &rhs) const {
-            return !(rhs == *this);
-        }
+    VoiceBean();
+    VoiceBean(const string &action);
+    VoiceBean(const string &action, const VoiceItemBean &voiceItemBean);
+    virtual ~VoiceBean();
 
-        VoiceItemBean &operator=(const VoiceItemBean &rhs) {
-            tts = rhs.tts;
-            return *this;
-        }
+    bool operator==(const VoiceBean &rhs) const;
+    bool operator!=(const VoiceBean &rhs) const;
+    VoiceBean &operator=(const VoiceBean &vb);
 
-        const string &getTts() const {
-            return tts;
-        }
+    const VoiceItemBean &getVoiceItemBean() const;
+    void setVoiceItemBean(const VoiceItemBean &voiceItemBean);
+    bool canPlay();
 
-        void setTts(const string &tts) {
-            VoiceItemBean::tts = tts;
-        }
-
-    };
-
-    class VoiceBean : public BaseActionBean {
-
-    private:
-        VoiceItemBean voiceItemBean;
-
-    public:
-
-        VoiceBean() {}
-
-        VoiceBean(const string &action) : BaseActionBean(action) {}
-
-        VoiceBean(const string &action, const VoiceItemBean &voiceItemBean) : BaseActionBean(action),
-                                                                              voiceItemBean(voiceItemBean) {
-        }
-
-        virtual ~VoiceBean() {
-
-        }
-
-        bool operator==(const VoiceBean &rhs) const {
-            return static_cast<const VoiceBean &>(*this) == static_cast<const VoiceBean &>(rhs) &&
-                   voiceItemBean == rhs.voiceItemBean;
-        }
-
-        bool operator!=(const VoiceBean &rhs) const {
-            return !(rhs == *this);
-        }
-
-        VoiceBean &operator=(const VoiceBean &vb){
-            voiceItemBean = vb.voiceItemBean;
-            return *this;
-        };
-
-        const VoiceItemBean &getVoiceItemBean() const {
-            return voiceItemBean;
-        }
-
-        void setVoiceItemBean(const VoiceItemBean &voiceItemBean) {
-            VoiceBean::voiceItemBean = voiceItemBean;
-        }
-
-        bool canPlay() {
-            return !(voiceItemBean.getTts().empty());
-        }
-
-    };
+};
 
 }
+
+#endif
