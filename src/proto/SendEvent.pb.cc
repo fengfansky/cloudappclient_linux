@@ -2,7 +2,7 @@
 // source: SendEvent.proto
 
 #define INTERNAL_SUPPRESS_PROTOBUF_FIELD_DEPRECATION
-#include "SendEvent.pb.h"
+#include "../../include/cloudapi/proto/SendEvent.pb.h"
 
 #include <algorithm>
 

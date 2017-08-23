@@ -3,8 +3,8 @@
 //
 #include <sstream>
 #include <map>
-#include "../util/MD5Utils.h"
-#include "BaseUrlConfig.h"
+#include "../../include/cloudapi/util/MD5Utils.h"
+#include "../../include/cloudapi/http/BaseUrlConfig.h"
 
 
 using std::string;

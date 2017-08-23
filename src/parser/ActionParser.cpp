@@ -2,9 +2,9 @@
 // Created by Fan Feng on 2017/7/28.
 //
 
-#include "ActionParser.h"
+#include "../../include/cloudapi/parser/ActionParser.h"
 #include "../json/json.h"
-#include "../util/rlog.h"
+#include "../../include/cloudapi/util/rlog.h"
 
 using namespace CloudAppClient;
 

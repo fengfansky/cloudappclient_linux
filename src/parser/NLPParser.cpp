@@ -2,8 +2,8 @@
 // Created by Fan Feng on 2017/7/28.
 //
 
-#include "NLPParser.h"
-#include "../util/rlog.h"
+#include "../../include/cloudapi/parser/NLPParser.h"
+#include "../../include/cloudapi/util/rlog.h"
 #include "../json/json.h"
 
 using namespace CloudAppClient;

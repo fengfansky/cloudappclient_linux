@@ -9,7 +9,7 @@
 #include "../action/MediaAction.h"
 #include "../action/VoiceAction.h"
 #include "../bean/CloudActionResponseBean.h"
-#include "../state/StateCallback.h"
+#include "../bean/ActionNode.h"
 
 using namespace std;
 using namespace Poco;
@@ -47,7 +47,7 @@ enum USER_VOICE_CONTROL_TYPE {
 };
 
 
-class BaseAppState : public IAppState{
+class BaseAppState{
 public:
 
     BaseAppState() {};

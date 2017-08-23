@@ -15,7 +15,7 @@
 #include <string>
 #include <memory>
 
-#include "rlog.h"
+#include "../../include/cloudapi/util/rlog.h"
 
 using std::shared_ptr;
 using std::string;

@@ -7,7 +7,6 @@
 #include <string>
 #include "BaseAppState.h"
 #include "SceneAppState.h"
-#include "StateCallback.h"
 #include "../bean/ActionBean.h"
 
 using namespace std;

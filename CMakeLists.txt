@@ -5,61 +5,60 @@ set(CMAKE_CXX_STANDARD 11)
 
 set(SOURCE_FILES
         src/main.cpp
-        src/action/BaseAction.h
+        include/cloudapi/action/BaseAction.h
         src/action/BaseAction.cpp
-        src/action/MediaAction.h
+        include/cloudapi/action/MediaAction.h
         src/action/MediaAction.cpp
-        src/action/VoiceAction.h
+        include/cloudapi/action/VoiceAction.h
         src/action/VoiceAction.cpp
-        src/bean/ActionBean.h
+        include/cloudapi/bean/ActionBean.h
         src/bean/ActionBean.cpp
-        src/bean/ActionNode.h
+        include/cloudapi/bean/ActionNode.h
         src/bean/ActionNode.cpp
-        src/bean/BaseActionBean.h
+        include/cloudapi/bean/BaseActionBean.h
         src/bean/BaseActionBean.cpp
-        src/bean/CloudActionResponseBean.h
+        include/cloudapi/bean/CloudActionResponseBean.h
         src/bean/CloudActionResponseBean.cpp
-        src/bean/ConfirmBean.h
+        include/cloudapi/bean/ConfirmBean.h
         src/bean/ConfirmBean.cpp
-        src/bean/MediaBean.h
+        include/cloudapi/bean/MediaBean.h
         src/bean/MediaBean.cpp
-        src/bean/NLPBean.h
+        include/cloudapi/bean/NLPBean.h
         src/bean/NLPBean.cpp
-        src/bean/PickupBean.h
+        include/cloudapi/bean/PickupBean.h
         src/bean/PickupBean.cpp
-        src/bean/ResponseBean.h
+        include/cloudapi/bean/ResponseBean.h
         src/bean/ResponseBean.cpp
-        src/bean/SessionBean.h
+        include/cloudapi/bean/SessionBean.h
         src/bean/SessionBean.cpp
-        src/bean/VoiceBean.h
+        include/cloudapi/bean/VoiceBean.h
         src/bean/VoiceBean.cpp
-        src/http/BaseUrlConfig.h
+        include/cloudapi/http/BaseUrlConfig.h
         src/http/BaseUrlConfig.cpp
-        src/http/HttpClientWrapper.h
+        include/cloudapi/http/HttpClientWrapper.h
         src/http/HttpClientWrapper.cpp
         src/json/json.h
-        src/parser/ActionParser.h
+        include/cloudapi/parser/ActionParser.h
         src/parser/ActionParser.cpp
-        src/parser/NLPParser.h
+        include/cloudapi/parser/NLPParser.h
         src/parser/NLPParser.cpp
-        src/proto/SendEvent.pb.h
+        include/cloudapi/proto/SendEvent.pb.h
         src/proto/SendEvent.pb.cc
-        src/reporter/BaseReporter.h
+        include/cloudapi/reporter/BaseReporter.h
         src/reporter/BaseReporter.cpp
-        src/state/AppStateMachine.h
+        include/cloudapi/state/AppStateMachine.h
         src/state/AppStateMachine.cpp
-        src/state/BaseAppState.h
+        include/cloudapi/state/BaseAppState.h
         src/state/BaseAppState.cpp
-        src/state/CutAppState.h
+        include/cloudapi/state/CutAppState.h
         src/state/CutAppState.cpp
-        src/state/SceneAppState.h
+        include/cloudapi/state/SceneAppState.h
         src/state/SceneAppState.cpp
-        src/state/StateCallback.h
-        src/util/rlog.h
+        include/cloudapi/util/rlog.h
         src/util/log.cc
-        src/util/md5.h
+        include/cloudapi/util/md5.h
         src/util/md5.cpp
-        src/util/MD5Utils.h
+        include/cloudapi/util/MD5Utils.h
         src/util/MD5Utils.cpp)
 
 

@@ -1,10 +1,10 @@
 #include "json/json.h"
-#include "bean/NLPBean.h"
-#include "parser/NLPParser.h"
-#include "parser/ActionParser.h"
-#include "proto/SendEvent.pb.h"
-#include "http/HttpClientWrapper.h"
-#include "http/BaseUrlConfig.h"
+#include "../include/cloudapi/bean/NLPBean.h"
+#include "../include/cloudapi/parser/NLPParser.h"
+#include "../include/cloudapi/parser/ActionParser.h"
+#include "../include/cloudapi/proto/SendEvent.pb.h"
+#include "../include/cloudapi/http/HttpClientWrapper.h"
+#include "../include/cloudapi/http/BaseUrlConfig.h"
 
 using std::string;
 using namespace nlohmann;
